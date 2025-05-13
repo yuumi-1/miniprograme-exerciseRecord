@@ -1,7 +1,9 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/addRecord/addRecord"
+    "pages/addRecord/addRecord",
+    "pages/index2/index2",
+    "pages/Profile/Profile"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -21,5 +23,8 @@
   },
   "componentFramework": "glass-easel",
   "sitemapLocation": "sitemap.json",
-  "lazyCodeLoading": "requiredComponents"
+  "lazyCodeLoading": "requiredComponents",
+  "useExtendedLib": {
+    "weui": true
+  }
 }

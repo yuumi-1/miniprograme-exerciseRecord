@@ -1,11 +1,16 @@
 Page({
   data: {
     date: '',
-    units: ['kg', 'lb'],
+    units: ['KG', 'LB'],
     unitIndex: 0,
     squatSets: [{ weight: '', reps: '' }],
     deadliftSets: [{ weight: '', reps: '' }],
     benchpressSets: [{ weight: '', reps: '' }]
+  },
+
+  // 跳转到添加记录页面
+  onNavigateBack: function() {
+    wx.navigateBack();
   },
 
   onLoad: function() {

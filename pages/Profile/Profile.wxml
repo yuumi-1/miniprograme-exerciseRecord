@@ -1,0 +1,5 @@
+<!--pages/Profile/Profile.wxml-->
+<view class="page">
+  <mp-icon type="field" icon="delete" color="red" size="{{25}}"></mp-icon>
+  <mp-icon icon="delete" color="red" size="{{25}}"></mp-icon>
+</view>

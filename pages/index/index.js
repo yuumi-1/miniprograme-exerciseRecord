@@ -67,7 +67,12 @@ Page({
       url: '/pages/addRecord/addRecord'
     });
   },
-
+ // 跳转到我的页面
+ navigateToProfile: function() {
+  wx.navigateTo({
+    url: '/pages/Profile/Profile'
+  });
+},
   // 下拉刷新
   onPullDownRefresh: function() {
     this.setData({
