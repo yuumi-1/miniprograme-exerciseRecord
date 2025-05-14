@@ -8,7 +8,7 @@ Page({
     benchpressSets: [{ weight: '', reps: '' }]
   },
 
-  // 跳转到添加记录页面
+  // 返回上一页
   onNavigateBack: function() {
     wx.navigateBack();
   },
@@ -19,7 +19,12 @@ Page({
     const year = date.getFullYear();
     const month = this.formatNumber(date.getMonth() + 1);
     const day = this.formatNumber(date.getDate());
+    const app = getApp();
     this.setData({
+      menuHeight: app.globalData.menuHeight,
+      menuBottom: app.globalData.menuBottom,
+      menuRight: app.globalData.menuRight,
+      menuTop: app.globalData.menuTop,
       date: `${year}-${month}-${day}`
     });
   },
@@ -115,6 +120,11 @@ Page({
         benchpressSets: [...this.data.benchpressSets, newSet]
       });
     }
+    else {
+      this.setData({
+        benchpressSets: [...this.data.benchpressSets, newSet]
+      });
+    }
   },
 
   // 删除组
@@ -151,15 +161,15 @@ Page({
       exercises: [
         {
           name: 'Squat',
-          sets: this.data.squatSets.filter(set => set.weight || set.reps)
+          sets: this.data.squatSets.filter(set => set.weight && set.reps)
         },
         {
           name: 'Deadlift',
-          sets: this.data.deadliftSets.filter(set => set.weight || set.reps)
+          sets: this.data.deadliftSets.filter(set => set.weight && set.reps)
         },
         {
           name: 'Benchpress',
-          sets: this.data.benchpressSets.filter(set => set.weight || set.reps)
+          sets: this.data.benchpressSets.filter(set => set.weight && set.reps)
         }
       ],
       createTime: new Date()
@@ -180,11 +190,19 @@ Page({
         title: '保存成功',
         icon: 'success'
       });
+      // 获取当前页面栈
+      const pages = getCurrentPages();
+      console.log('当前页面栈:', pages);
       
+      // 获取上一页实例（pages数组的倒数第二个元素）
+      const prevPage = pages[pages.length - 2];
+      console.log('上一页面栈:', prevPage);
+      prevPage.refreshData();
+
       // 返回上一页
       setTimeout(() => {
-        wx.navigateBack();
-      }, 1500);
+        wx.navigateBack()
+      }, 500)
     }).catch(err => {
       wx.hideLoading();
       wx.showToast({
@@ -198,9 +216,9 @@ Page({
   // 数据验证
   validateData: function() {
     // 检查是否有填写的锻炼数据
-    const hasSquatData = this.data.squatSets.some(set => set.weight || set.reps);
-    const hasDeadliftData = this.data.deadliftSets.some(set => set.weight || set.reps);
-    const hasBenchpressData = this.data.benchpressSets.some(set => set.weight || set.reps);
+    const hasSquatData = this.data.squatSets.some(set => set.weight && set.reps);
+    const hasDeadliftData = this.data.deadliftSets.some(set => set.weight && set.reps);
+    const hasBenchpressData = this.data.benchpressSets.some(set => set.weight && set.reps);
     
     if (!hasSquatData && !hasDeadliftData && !hasBenchpressData) {
       wx.showToast({

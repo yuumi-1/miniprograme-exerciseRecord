@@ -23,8 +23,5 @@
   },
   "componentFramework": "glass-easel",
   "sitemapLocation": "sitemap.json",
-  "lazyCodeLoading": "requiredComponents",
-  "useExtendedLib": {
-    "weui": true
-  }
+  "lazyCodeLoading": "requiredComponents"
 }

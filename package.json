@@ -1,0 +1,22 @@
+{
+  "name": "miniprogram-6",
+  "version": "1.0.0",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yuumi-1/miniprograme-exerciseRecord.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yuumi-1/miniprograme-exerciseRecord/issues"
+  },
+  "homepage": "https://github.com/yuumi-1/miniprograme-exerciseRecord#readme",
+  "description": "",
+  "dependencies": {
+    "weui-miniprogram": "^1.5.6"
+  }
+}

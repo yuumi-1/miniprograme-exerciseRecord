@@ -11,8 +11,18 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {
-
+  onLoad: function() {
+    const app = getApp();
+    this.setData({
+      menuHeight: app.globalData.menuHeight,
+      menuBottom: app.globalData.menuBottom,
+      menuRight: app.globalData.menuRight,
+      menuTop: app.globalData.menuTop
+    });
+  },
+  // 返回上一页
+  onNavigateBack: function() {
+    wx.navigateBack();
   },
 
   /**

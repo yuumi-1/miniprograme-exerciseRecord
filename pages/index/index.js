@@ -67,23 +67,28 @@ Page({
       url: '/pages/addRecord/addRecord'
     });
   },
- // 跳转到我的页面
- navigateToProfile: function() {
-  wx.navigateTo({
-    url: '/pages/Profile/Profile'
-  });
-},
-  // 下拉刷新
-  onPullDownRefresh: function() {
+  // 跳转到我的页面
+  navigateToProfile: function() {
+    wx.navigateTo({
+      url: '/pages/Profile/Profile'
+    });
+  },
+  // 添加刷新方法（修改：重置分页状态）
+  refreshData() {
     this.setData({
       pageNum: 1,
       hasMore: true
     });
-    this.getRecords().then(() => {
+    return this.getRecords();
+  },
+
+  
+  // 下拉刷新
+  onPullDownRefresh: function() {
+    this.refreshData().then(() => {
       wx.stopPullDownRefresh();
     });
   },
-
   // 上拉加载更多
   onReachBottom: function() {
     this.getRecords();
