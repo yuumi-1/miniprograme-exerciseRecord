@@ -82,7 +82,41 @@ Page({
     return this.getRecords();
   },
 
+   // 删除记录
+deleteRecord(e) {
+  const recordId = e.currentTarget.dataset.id; // 修正：多了一个分号
   
+  // 显示确认对话框
+  wx.showModal({
+    title: "删除这条训练记录",
+    content: "确定要删除这条训练记录吗？", // 添加内容提示
+    success: (res) => {
+      if (res.confirm) {
+        wx.showLoading({ title: '删除中...' });
+        
+        // 调用云函数删除数据
+        wx.cloud.database().collection('workout_records').doc(recordId).remove()
+          .then(res => {
+            wx.hideLoading();
+            wx.showToast({
+              title: '删除成功',
+              icon: 'success'
+            });
+            // 刷新数据列表
+            this.getRecords();
+          })
+          .catch(err => {
+            wx.hideLoading();
+            wx.showToast({
+              title: '删除失败',
+              icon: 'none'
+            });
+            console.error('删除失败：', err);
+          });
+        }
+      }
+    });
+  },
   // 下拉刷新
   onPullDownRefresh: function() {
     this.refreshData().then(() => {

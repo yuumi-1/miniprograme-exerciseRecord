@@ -2,7 +2,6 @@
   "pages": [
     "pages/index/index",
     "pages/addRecord/addRecord",
-    "pages/index2/index2",
     "pages/Profile/Profile"
   ],
   "window": {

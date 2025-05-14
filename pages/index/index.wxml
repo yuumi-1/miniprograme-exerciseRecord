@@ -9,9 +9,6 @@
       <view class="empty-state" wx:if="{{records.length === 0}}">
         <mp-icon icon="more" size="{{30}}"></mp-icon>
         <text>暂无训练记录</text>
-        <button class="add-btn" bindtap="navigateToAddRecord">
-          添加记录
-        </button>
       </view>
     
       <!-- 记录列表 -->
@@ -19,6 +16,7 @@
         <view class="record-item" wx:for="{{records}}" wx:key="_id">
           <view class="record-header">
             <text class="date">{{item.date}}</text>
+            <mp-icon icon="delete" color="#CC0000" size="{{25}}" bindtap="deleteRecord" data-id="{{item._id}}"></mp-icon>
           </view>
           <!-- 动态遍历所有记录 -->
           <view class="exercise-group" wx:for="{{item.exercises}}" wx:key="index" wx:if="{{item.sets && item.sets.length > 0}}">

@@ -37,7 +37,7 @@
             <mp-icon type="field" icon="add" color="#3D9970" size="{{25}}"></mp-icon>
           </view>
           <view wx:if="{{index > 0}}" bindtap="deleteSet" data-type="squat" data-index="{{index}}">
-            <mp-icon icon="delete" color="red" size="{{25}}"></mp-icon>
+            <mp-icon icon="delete" color="#CC0000" size="{{25}}"></mp-icon>
           </view>
         </view>
       </view>
@@ -62,7 +62,7 @@
             <mp-icon type="field" icon="add" color="#3D9970" size="{{25}}"></mp-icon>
           </view>
           <view wx:if="{{index > 0}}" bindtap="deleteSet" data-type="deadlift" data-index="{{index}}">
-            <mp-icon icon="delete" color="red" size="{{25}}"></mp-icon>
+            <mp-icon icon="delete" color="#CC0000" size="{{25}}"></mp-icon>
           </view>    
         </view>
       </view>
@@ -83,11 +83,15 @@
                  bindinput="bindBenchpressRepsChange" 
                  data-index="{{index}}"/>
           <text>次</text>
-          <view wx:if="{{index === 0}}" bindtap="addSet" data-type="benchpress">
+          
+          <view wx:if="{{benchpressSets.length === 1}}" bindtap="addSet" data-type="benchpress">
             <mp-icon type="field" icon="add" color="#3D9970" size="{{25}}"></mp-icon>
           </view>
-          <view wx:if="{{index > 0}}" bindtap="deleteSet" data-type="benchpress" data-index="{{index}}">
-            <mp-icon icon="delete" color="red" size="{{25}}"></mp-icon>
+          <view wx:elif="{{index === benchpressSets.length - 1}}" bindtap="addSet" data-type="benchpress">
+            <mp-icon type="field" icon="add" color="#3D9970" size="{{25}}"></mp-icon>
+          </view>
+          <view wx:else bindtap="deleteSet" data-type="benchpress" data-index="{{index}}">
+            <mp-icon icon="delete" color="#CC0000" size="{{25}}"></mp-icon>
           </view>
         </view>
       </view>
