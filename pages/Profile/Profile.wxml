@@ -1,6 +1,10 @@
 <!--pages/Profile/Profile.wxml-->
 <view class="page">
   <!-- 返回按钮 -->
-  <nav-back/>
-
+  <t-navbar title="我的" left-arrow />
+  预测1RM:
+  <view class="max1RMcontent">
+    <view wx:for="{{max1RM}}">{{item}}</view>
+    <view wx:for="{{maxExercise}}">{{item}}</view>
+  </view>
 </view>

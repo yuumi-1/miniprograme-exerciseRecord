@@ -1,6 +1,6 @@
 <view class="page">
   <!-- 返回按钮 -->
-  <nav-back/>
+  <t-navbar title="添加记录" left-arrow />
   <!-- 锻炼项目列表 -->
   <scroll-view class="workout-list" scroll-y="true">
     <!-- 顶部日期和单位选择器 -->
@@ -26,17 +26,22 @@
           <input type="digit" placeholder="重量" 
                  value="{{item.weight}}" 
                  bindinput="bindSquatWeightChange" 
-                 data-index="{{index}}"/>
+                 data-index="{{index}}"
+                 cursor-spacing="100"/>
           <text class="unit-text">{{units[unitIndex]}}</text>
           <input type="digit" placeholder="次数" 
                  value="{{item.reps}}" 
                  bindinput="bindSquatRepsChange" 
-                 data-index="{{index}}"/>
+                 data-index="{{index}}"
+                 cursor-spacing="100"/>
           <text>次</text>
-          <view wx:if="{{index === 0}}" bindtap="addSet" data-type="squat">
+          <view wx:if="{{squatSets.length === 1}}" bindtap="addSet" data-type="squat">
             <mp-icon type="field" icon="add" color="#3D9970" size="{{25}}"></mp-icon>
           </view>
-          <view wx:if="{{index > 0}}" bindtap="deleteSet" data-type="squat" data-index="{{index}}">
+          <view wx:elif="{{index === squatSets.length - 1}}" bindtap="addSet" data-type="squat">
+            <mp-icon type="field" icon="add" color="#3D9970" size="{{25}}"></mp-icon>
+          </view>
+          <view wx:else bindtap="deleteSet" data-type="squat" data-index="{{index}}">
             <mp-icon icon="delete" color="#CC0000" size="{{25}}"></mp-icon>
           </view>
         </view>
@@ -51,19 +56,24 @@
           <input type="digit" placeholder="重量" 
                  value="{{item.weight}}" 
                  bindinput="bindDeadliftWeightChange" 
-                 data-index="{{index}}"/>
+                 data-index="{{index}}"
+                 cursor-spacing="100"/>
           <text class="unit-text">{{units[unitIndex]}}</text>
           <input type="digit" placeholder="次数" 
                  value="{{item.reps}}" 
                  bindinput="bindDeadliftRepsChange" 
-                 data-index="{{index}}"/>
+                 data-index="{{index}}"
+                 cursor-spacing="100"/>
           <text>次</text>
-          <view wx:if="{{index === 0}}" bindtap="addSet" data-type="deadlift">
+          <view wx:if="{{deadliftSets.length === 1}}" bindtap="addSet" data-type="deadlift">
             <mp-icon type="field" icon="add" color="#3D9970" size="{{25}}"></mp-icon>
           </view>
-          <view wx:if="{{index > 0}}" bindtap="deleteSet" data-type="deadlift" data-index="{{index}}">
+          <view wx:elif="{{index === deadliftSets.length - 1}}" bindtap="addSet" data-type="deadlift">
+            <mp-icon type="field" icon="add" color="#3D9970" size="{{25}}"></mp-icon>
+          </view>
+          <view wx:else bindtap="deleteSet" data-type="deadlift" data-index="{{index}}">
             <mp-icon icon="delete" color="#CC0000" size="{{25}}"></mp-icon>
-          </view>    
+          </view>
         </view>
       </view>
     </view>
@@ -76,12 +86,14 @@
           <input type="digit" placeholder="重量" 
                  value="{{item.weight}}" 
                  bindinput="bindBenchpressWeightChange" 
-                 data-index="{{index}}"/>
+                 data-index="{{index}}"
+                 cursor-spacing="100"/>
           <text class="unit-text">{{units[unitIndex]}}</text>
           <input type="digit" placeholder="次数" 
                  value="{{item.reps}}" 
                  bindinput="bindBenchpressRepsChange" 
-                 data-index="{{index}}"/>
+                 data-index="{{index}}"
+                 cursor-spacing="100"/>
           <text>次</text>
           
           <view wx:if="{{benchpressSets.length === 1}}" bindtap="addSet" data-type="benchpress">

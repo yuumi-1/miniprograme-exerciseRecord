@@ -8,7 +8,7 @@
 /* 顶部区域 */
 .header-section {
   display: flex;
-  padding: 200rpx 20rpx 20rpx;
+  padding: 20rpx;
   justify-content: space-between;
   margin-bottom: 20rpx;
 }

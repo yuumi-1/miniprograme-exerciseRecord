@@ -1,1 +1,6 @@
 /* pages/Profile/Profile.wxss */
+.max1RMcontent{
+  display: block;
+  height: 500rpx;
+  width: 500rpx;
+}

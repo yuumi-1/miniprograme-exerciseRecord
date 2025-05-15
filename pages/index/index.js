@@ -89,7 +89,6 @@ deleteRecord(e) {
   // 显示确认对话框
   wx.showModal({
     title: "删除这条训练记录",
-    content: "确定要删除这条训练记录吗？", // 添加内容提示
     success: (res) => {
       if (res.confirm) {
         wx.showLoading({ title: '删除中...' });
@@ -103,7 +102,7 @@ deleteRecord(e) {
               icon: 'success'
             });
             // 刷新数据列表
-            this.getRecords();
+            this.refreshData();            
           })
           .catch(err => {
             wx.hideLoading();

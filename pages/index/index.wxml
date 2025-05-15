@@ -37,7 +37,7 @@
   <!-- 底部导航栏 -->
   <view class="bottom-nav">
     <view class="nav-item" bindtap="navigateToHome">
-      <mp-icon icon="star" color="black" size="{{35}}" ></mp-icon>
+      <t-icon name="home" size="60rpx"/>
       <text class="nav-text">首页</text>
     </view>
     <view class="nav-item" bindtap="navigateToProfile">
@@ -45,8 +45,14 @@
       <text class="nav-text">添加记录</text>
     </view>
     <view class="nav-item" bindtap="navigateToProfile">
-      <mp-icon icon="me" color="black" size="{{35}}" ></mp-icon>
+      <t-icon name="user-1" size="60rpx"/>
       <text class="nav-text">我的</text>
     </view>
+  </view>
+  <view class="save-button">
+    <t-button theme="primary" size="large" icon="add" shape="round" bindtap="navigateToAddRecord"
+    variant="base">
+      添加
+    </t-button>
   </view>
 </view>  

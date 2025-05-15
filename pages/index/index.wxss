@@ -176,3 +176,8 @@
   color: #999;
   font-size: 28rpx;
 }
+.save-button {
+  position: fixed;
+  bottom: 208rpx;
+  right: 32rpx;
+}

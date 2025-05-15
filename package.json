@@ -16,6 +16,7 @@
   },
   "homepage": "https://github.com/yuumi-1/miniprograme-exerciseRecord#readme",
   "dependencies": {
+    "tdesign-miniprogram": "^1.9.2",
     "weui-miniprogram": "^1.5.6"
   },
   "description": ""

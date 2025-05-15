@@ -145,6 +145,7 @@ Page({
       sets.splice(index, 1);
       this.setData({ benchpressSets: sets });
     }
+    
   },
 
   // 保存并返回
