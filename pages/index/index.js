@@ -84,11 +84,12 @@ Page({
 
    // 删除记录
 deleteRecord(e) {
-  const recordId = e.currentTarget.dataset.id; // 修正：多了一个分号
-  
+  const recordId = e.currentTarget.dataset.id; 
+
   // 显示确认对话框
   wx.showModal({
-    title: "删除这条训练记录",
+    title: "删除记录",
+    content: "确定删除这条训练记录吗？",
     success: (res) => {
       if (res.confirm) {
         wx.showLoading({ title: '删除中...' });

@@ -4,7 +4,6 @@
   <t-navbar title="我的" left-arrow />
   预测1RM:
   <view class="max1RMcontent">
-    <view wx:for="{{max1RM}}">{{item}}</view>
-    <view wx:for="{{maxExercise}}">{{item}}</view>
+    <view wx:for="{{max1RM}}" wx:for-index="key">{{key}} {{item}}</view>
   </view>
 </view>
