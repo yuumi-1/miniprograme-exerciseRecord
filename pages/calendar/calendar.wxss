@@ -1,0 +1,155 @@
+.calendar-container {
+  padding: 20rpx;
+  background-color: #fff;
+  min-height: 100vh;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx;
+}
+
+.calendar-title {
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+.calendar-nav {
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.weekdays {
+  display: flex;
+  margin: 10rpx 0;
+}
+
+.weekday {
+  flex: 1;
+  text-align: center;
+  padding: 10rpx;
+  font-weight: bold;
+  color: #666;
+}
+
+.days-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.day {
+  width: 14.28%;
+  height: 120rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10rpx 0;
+  position: relative;
+}
+
+.day text {
+  font-size: 28rpx;
+}
+
+.day.empty {
+  opacity: 0;
+}
+
+.has-record {
+  background-color: rgba(61, 153, 112, 0.1);
+  border-radius: 10rpx;
+}
+
+.record-dot {
+  width: 10rpx;
+  height: 10rpx;
+  background-color: red;
+  border-radius: 50%;
+  bottom: 10rpx;
+}
+
+.record-text {
+  color: #FF4500;
+  font-size: 22rpx;
+}
+
+/* 弹窗样式 */
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-container {
+  background-color: #fff;
+  width: 90%;
+  max-height: 80%;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 32rpx;
+  border-bottom: 1rpx solid #eee;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.modal-content {
+  padding: 24rpx 32rpx;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.workout-item {
+  margin-bottom: 24rpx;
+  padding-bottom: 24rpx;
+}
+
+.workout-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  margin-bottom: 16rpx;
+}
+
+.workout-sets {
+  padding-left: 24rpx;
+}
+
+.set-item {
+  font-size: 26rpx;
+  color: #666;
+  margin-bottom: 8rpx;
+}
+
+.modal-footer {
+  padding: 24rpx 32rpx;
+  display: flex;
+  justify-content: center;
+}
+
+.modal-button {
+  background-color: #3D9970;
+  color: white;
+  width: 100%;
+  padding: 16rpx 0;
+  border-radius: 10rpx;
+  text-align: center;
+  font-size: 28rpx;
+}

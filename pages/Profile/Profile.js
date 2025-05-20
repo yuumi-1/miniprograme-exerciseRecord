@@ -6,6 +6,7 @@ Page({
    */
   data: {
     max1RM: {}, 
+    unit: "",
     loading: true,    // 加载状态
   },
 
@@ -37,11 +38,12 @@ Page({
     .then(res => {
       const records = res.data;
       if (!records.length) {
-        this.setData({ loading: false, max1RM: {}, maxExercise: '暂无记录' });
+        this.setData({ loading: false, unit:"", max1RM: {}, maxExercise: '暂无记录' });
         return;
       }
       // 计算每条记录的 1RM 并找出最大值
       let max1RM = {};
+      let unit = {};
       // 遍历所有记录
       records.forEach(record => {
       // 遍历每个训练项目
@@ -53,21 +55,25 @@ Page({
             const reps = parseFloat(set.reps);
             
             // 使用 Epley 公式计算 1RM
-            const epley1RM = Math.round(weight * (1 + reps / 30) * 100) / 100 ;  
+            const epley1RM = Math.round(weight * (1 + reps / 30) / 5) * 5 ;  
             // 检查是否已有该 exercise.name 且计算最大值
             if (max1RM.hasOwnProperty(exercise.name)) {
               if (epley1RM > max1RM[exercise.name]) {
-              max1RM[exercise.name] = epley1RM; // 更新为较大值
+              max1RM[exercise.name] = epley1RM;
+              unit = "kg";
+               // 更新为较大值
               }
             } 
             else {
               max1RM[exercise.name] = epley1RM; // 新增记录
+              unit = "kg";
             }          
           });
         });
       });
     this.setData({
       max1RM,
+      unit,
       loading: false
     })
     .catch(err => {

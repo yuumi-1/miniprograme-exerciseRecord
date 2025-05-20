@@ -61,6 +61,12 @@ Page({
     const minutes = date.getMinutes().toString().padStart(2, '0');
     return `${hours}:${minutes}`;
   },
+  // 跳转到数据分析页面
+  navigateToCalendar: function() {
+    wx.navigateTo({
+      url: '/pages/calendar/calendar'
+    });
+  },
   // 跳转到添加记录页面
   navigateToAddRecord: function() {
     wx.navigateTo({
@@ -83,37 +89,37 @@ Page({
   },
 
    // 删除记录
-deleteRecord(e) {
-  const recordId = e.currentTarget.dataset.id; 
+  deleteRecord(e) {
+    const recordId = e.currentTarget.dataset.id; 
 
-  // 显示确认对话框
-  wx.showModal({
-    title: "删除记录",
-    content: "确定删除这条训练记录吗？",
-    success: (res) => {
-      if (res.confirm) {
-        wx.showLoading({ title: '删除中...' });
-        
-        // 调用云函数删除数据
-        wx.cloud.database().collection('workout_records').doc(recordId).remove()
-          .then(res => {
-            wx.hideLoading();
-            wx.showToast({
-              title: '删除成功',
-              icon: 'success'
+    // 显示确认对话框
+    wx.showModal({
+      title: "确认删除",
+      content: "确定要删除这条训练记录吗？",
+      success: (res) => {
+        if (res.confirm) {
+          wx.showLoading({ title: '删除中...' });
+          
+          // 调用云函数删除数据
+          wx.cloud.database().collection('workout_records').doc(recordId).remove()
+            .then(res => {
+              wx.hideLoading();
+              wx.showToast({
+                title: '删除成功',
+                icon: 'success'
+              });
+              // 刷新数据列表
+              this.refreshData();            
+            })
+            .catch(err => {
+              wx.hideLoading();
+              wx.showToast({
+                title: '删除失败',
+                icon: 'none'
+              });
+              console.error('删除失败：', err);
             });
-            // 刷新数据列表
-            this.refreshData();            
-          })
-          .catch(err => {
-            wx.hideLoading();
-            wx.showToast({
-              title: '删除失败',
-              icon: 'none'
-            });
-            console.error('删除失败：', err);
-          });
-        }
+          }
       }
     });
   },

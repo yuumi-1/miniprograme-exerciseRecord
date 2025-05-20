@@ -28,10 +28,8 @@ App({
   calcNavBarInfo () {
     // 获取系统信息
     const systemInfo = wx.getWindowInfo();
-    console.log(systemInfo);
     // 胶囊按钮位置信息
     const menuButtonInfo = wx.getMenuButtonBoundingClientRect();
-    console.log(menuButtonInfo);
     this.globalData.navBarHeight = systemInfo.statusBarHeight + 44;
     this.globalData.menuRight = systemInfo.screenWidth - menuButtonInfo.right;
     this.globalData.menuTop=  menuButtonInfo.top;

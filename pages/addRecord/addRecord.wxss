@@ -1,129 +1,135 @@
 .page {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  padding: 20rpx;
+  min-height: 100vh;
+  background: #F5F7FA;
+  padding: 32rpx 24rpx;
 }
 
-/* 顶部区域 */
-.header-section {
-  display: flex;
-  padding: 20rpx;
-  justify-content: space-between;
-  margin-bottom: 20rpx;
-}
+  /* 顶部区域 */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16rpx;
+  }
 
-.header-item {
-  flex: 1;
-  margin-right: 20rpx;
-}
+  .header-item {
+    flex: 1;
+    margin-right: 24rpx;
+  }
 
-.header-label {
-  display: block;
-  font-size: 28rpx;
-  color: #666;
-  margin-bottom: 10rpx;
-}
+  .label {
+    font-size: 28rpx;
+    color: #666;
+    margin-bottom: 12rpx;
+    display: block;
+  }
 
-.picker-value {
-  background-color: #fff;
-  padding: 15rpx 20rpx;
-  border-radius: 10rpx;
-  font-size: 32rpx;
-  border: 1rpx solid #eee;
-}
+  .picker {
+    background: #fff;
+    padding: 20rpx;
+    border-radius: 16rpx;
+    font-size: 32rpx;
+    box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.05);
+  }
 
-/* 锻炼项目 */
-.workout-list {
-  flex: 1;
-  overflow-y: auto;
-  margin-bottom: 160rpx; /* 为底部按钮留出空间 */
-}
+  /* 锻炼项目 */
+  .workout-list {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 500rpx; /* 为底部按钮留出空间 */
+    border-radius: 16rpx;
+    box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.05);
+  }
 
-.workout-item {
-  border-radius: 12rpx;
-  margin-bottom: 20rpx;
-  padding: 20rpx;
-  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.05);
-}
+  .workout-item {
+    background: #fff;
+    border-radius: 12rpx;
+    margin-bottom: 16rpx;
+    padding: 16rpx;
+    box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.05);
+  }
 
-.workout-title {
-  font-size: 36rpx;
-  font-weight: bold;
-  margin-bottom: 20rpx;
-  color: #000000;
-}
+  .workout-title {
+    display: flex;
+    justify-content: space-between;
+    font-size: 36rpx;
+    font-weight: bold;
+    margin-bottom: 20rpx;
+    color: #000000;
+  }
 
-.sets-container {
-  display: flex;
-  flex-direction: column;
-}
+  .sets-container {
+    display: flex;
+    flex-direction: column;
+  }
 
-.set-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15rpx;
-}
+  .set-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15rpx;
+  }
 
-.set-item input {
-  flex: 1;
-  padding: 15rpx;
-  border: 1rpx solid #eee;
-  border-radius: 8rpx;
-  margin-right: 15rpx;
-  font-size: 30rpx;
-}
+  .set-item input {
+    flex: 1;
+    padding: 15rpx;
+    border: 1rpx solid #eee;
+    border-radius: 8rpx;
+    margin-right: 15rpx;
+    font-size: 30rpx;
+  }
 
-.unit-text {
-  font-size: 30rpx;
-  margin-right: 15rpx;
-  min-width: 30rpx;
-  text-align: center;
-}
+  .unit-text {
+    font-size: 30rpx;
+    margin-right: 15rpx;
+    min-width: 30rpx;
+    text-align: center;
+  }
 
-.delete-btn {
-  width: 5rpx;
-}
+  .delete-btn {
+    width: 5rpx;
+  }
 
-.add-set-btn {
-  width: 100%;
-  padding: 15rpx 0;
-  text-align: center;
-  color: #000000;
-  border: 1rpx dashed #000000;
-  border-radius: 8rpx;
-  font-size: 30rpx;
-  margin-top: 10rpx;
-}
+  .add-set-btn {
+    width: 100%;
+    padding: 15rpx 0;
+    text-align: center;
+    color: #000000;
+    border: 1rpx dashed #000000;
+    border-radius: 8rpx;
+    font-size: 30rpx;
+    margin-top: 10rpx;
+  }
 
-/* 底部按钮 */
-.save-button-container {
-  position: fixed;
-  bottom: 50rpx;
-  left: 0;
-  right: 0;
-  padding: 0 30rpx;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-}
+  /* 底部按钮 */
+  .save-button-container {
+    position: fixed;
+    bottom: 50rpx;
+    left: 0;
+    right: 0;
+    padding: 0 30rpx;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+  }
 
-.save-button {
-  display: flex;
-  width: 100%;
-  height: 90rpx;
-  background-color: #007aff;
-  color: white;
-  border-radius: 45rpx;
-  font-size: 32rpx;
-  align-items: center;
-  justify-content: center;
-}    
-.back-btn {
-  position: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-  padding: 0 10rpx;
-}
+  .save-button {
+    display: flex;
+    width: 100%;
+    height: 90rpx;
+    background-color: #007aff;
+    color: white;
+    border-radius: 45rpx;
+    font-size: 32rpx;
+    align-items: center;
+    justify-content: center;
+  }    
+  .back-btn {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    padding: 0 10rpx;
+  }
+  

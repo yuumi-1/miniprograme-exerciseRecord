@@ -1,118 +1,75 @@
 <view class="page">
   <!-- 返回按钮 -->
   <t-navbar title="添加记录" left-arrow />
-  <!-- 锻炼项目列表 -->
+
+    <!-- 锻炼项目列表 -->
   <scroll-view class="workout-list" scroll-y="true">
     <!-- 顶部日期和单位选择器 -->
-    <view class="header-section">
-    <view class="header-item">
-      <text class="header-label">日期</text>
-      <picker mode="date" value="{{date}}" bindchange="bindDateChange">
-        <view class="picker-value">{{date}}</view>
-      </picker>
-    </view>
-    <view class="header-item">
-      <text class="header-label">重量单位</text>
-      <picker mode="selector" value="{{unitIndex}}" bindchange="bindUnitChange" range="{{units}}">
-        <view class="picker-value">{{units[unitIndex]}}</view>
-      </picker>
-    </view>
-  </view>
-    <!-- 深蹲 -->
-    <view class="workout-item">
-      <view class="workout-title">Squat</view>
-      <view class="sets-container">
-        <view class="set-item" wx:for="{{squatSets}}" wx:key="index">
-          <input type="digit" placeholder="重量" 
-                 value="{{item.weight}}" 
-                 bindinput="bindSquatWeightChange" 
-                 data-index="{{index}}"
-                 cursor-spacing="100"/>
-          <text class="unit-text">{{units[unitIndex]}}</text>
-          <input type="digit" placeholder="次数" 
-                 value="{{item.reps}}" 
-                 bindinput="bindSquatRepsChange" 
-                 data-index="{{index}}"
-                 cursor-spacing="100"/>
-          <text>次</text>
-          <view wx:if="{{squatSets.length === 1}}" bindtap="addSet" data-type="squat">
-            <mp-icon type="field" icon="add" color="#3D9970" size="{{25}}"></mp-icon>
-          </view>
-          <view wx:elif="{{index === squatSets.length - 1}}" bindtap="addSet" data-type="squat">
-            <mp-icon type="field" icon="add" color="#3D9970" size="{{25}}"></mp-icon>
-          </view>
-          <view wx:else bindtap="deleteSet" data-type="squat" data-index="{{index}}">
-            <mp-icon icon="delete" color="#CC0000" size="{{25}}"></mp-icon>
-          </view>
-        </view>
+    <view class="header">
+      <view class="header-item">
+        <text class="label">日期</text>
+        <picker mode="date" value="{{date}}" bindchange="bindDateChange">
+          <view class="picker">{{date}}</view>
+        </picker>
+      </view>
+      <view class="header-item">
+        <text class="label">重量单位</text>
+        <picker mode="selector" value="{{unitIndex}}" bindchange="bindUnitChange" range="{{units}}">
+          <view class="picker">{{units[unitIndex]}}</view>
+        </picker>
       </view>
     </view>
-
-    <!-- 硬拉 -->
-    <view class="workout-item">
-      <view class="workout-title">Deadlift</view>
-      <view class="sets-container">
-        <view class="set-item" wx:for="{{deadliftSets}}" wx:key="index">
-          <input type="digit" placeholder="重量" 
-                 value="{{item.weight}}" 
-                 bindinput="bindDeadliftWeightChange" 
-                 data-index="{{index}}"
-                 cursor-spacing="100"/>
-          <text class="unit-text">{{units[unitIndex]}}</text>
-          <input type="digit" placeholder="次数" 
-                 value="{{item.reps}}" 
-                 bindinput="bindDeadliftRepsChange" 
-                 data-index="{{index}}"
-                 cursor-spacing="100"/>
-          <text>次</text>
-          <view wx:if="{{deadliftSets.length === 1}}" bindtap="addSet" data-type="deadlift">
-            <mp-icon type="field" icon="add" color="#3D9970" size="{{25}}"></mp-icon>
-          </view>
-          <view wx:elif="{{index === deadliftSets.length - 1}}" bindtap="addSet" data-type="deadlift">
-            <mp-icon type="field" icon="add" color="#3D9970" size="{{25}}"></mp-icon>
-          </view>
-          <view wx:else bindtap="deleteSet" data-type="deadlift" data-index="{{index}}">
-            <mp-icon icon="delete" color="#CC0000" size="{{25}}"></mp-icon>
-          </view>
-        </view>
+    <!-- 动态渲染锻炼项目 -->
+    <view class="workout-item" wx:for="{{exercises}}" wx:key="name" wx:for-item="exercise">
+      <!-- 自定义训练名称可编辑 -->
+      <view wx:if="{{exercise.isCustom}}" class="workout-title">
+        <input type="text" 
+                placeholder="自定义训练项目" 
+                value="{{exercise.name}}" 
+                bindinput="onCustomNameChange" 
+                data-index="{{index}}"
+                class="custom-title-input"/>
+        <t-icon name="delete-1" color="#B22222" size="38rpx" bindtap="deleteItem" data-index="{{index}}"/>
       </view>
-    </view>
-
-    <!-- 卧推 -->
-    <view class="workout-item">
-      <view class="workout-title">Benchpress</view>
+      <!-- 普通训练名称不可编辑 -->
+      <view wx:else class="workout-title">{{exercise.name}}
+        <t-icon class="deleteIcon" name="delete-1" color="#B22222" size="38rpx" bindtap="deleteItem" data-index="{{index}}"/>
+      </view>
       <view class="sets-container">
-        <view class="set-item" wx:for="{{benchpressSets}}" wx:key="index">
+        <view class="set-item" wx:for="{{exercise.sets}}" wx:key="index" wx:for-item="set">
           <input type="digit" placeholder="重量" 
-                 value="{{item.weight}}" 
-                 bindinput="bindBenchpressWeightChange" 
-                 data-index="{{index}}"
-                 cursor-spacing="100"/>
+                value="{{set.weight}}" 
+                bindinput="onWeightChange" 
+                data-type="{{exercise.name}}" 
+                data-index="{{index}}"
+                cursor-spacing="100"/>
           <text class="unit-text">{{units[unitIndex]}}</text>
           <input type="digit" placeholder="次数" 
-                 value="{{item.reps}}" 
-                 bindinput="bindBenchpressRepsChange" 
-                 data-index="{{index}}"
-                 cursor-spacing="100"/>
+                value="{{set.reps}}" 
+                bindinput="onRepsChange" 
+                data-type="{{exercise.name}}" 
+                data-index="{{index}}"
+                cursor-spacing="100"/>
           <text>次</text>
           
-          <view wx:if="{{benchpressSets.length === 1}}" bindtap="addSet" data-type="benchpress">
-            <mp-icon type="field" icon="add" color="#3D9970" size="{{25}}"></mp-icon>
-          </view>
-          <view wx:elif="{{index === benchpressSets.length - 1}}" bindtap="addSet" data-type="benchpress">
-            <mp-icon type="field" icon="add" color="#3D9970" size="{{25}}"></mp-icon>
-          </view>
-          <view wx:else bindtap="deleteSet" data-type="benchpress" data-index="{{index}}">
-            <mp-icon icon="delete" color="#CC0000" size="{{25}}"></mp-icon>
+          <view class="set-actions">
+            <view wx:if="{{set.showAddBtn}}" bindtap="addSet" data-type="{{exercise.name}}">
+              <t-icon name="add" color="#228B22" size="46rpx"/>
+            </view>
+            <view wx:else bindtap="deleteSet" data-type="{{exercise.name}}" data-index="{{index}}">
+              <t-icon name="minus" color="#B22222" size="46rpx"/>
+            </view>
           </view>
         </view>
       </view>
     </view>
+    <t-button size="medium" block t-class="external-class" bindtap="addCustomSet">添加自定训练组</t-button>
   </scroll-view>
+
   <!-- 底部保存按钮 -->
   <view class="save-button-container">
     <button class="save-button" bindtap="saveAndBack">
       <text>保存</text>
     </button>
   </view>
-</view>    
+</view>

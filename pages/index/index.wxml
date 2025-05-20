@@ -16,7 +16,7 @@
         <view class="record-item" wx:for="{{records}}" wx:key="_id">
           <view class="record-header">
             <text class="date">{{item.date}}</text>
-            <mp-icon icon="delete" color="#CC0000" size="{{25}}" bindtap="deleteRecord" data-id="{{item._id}}"></mp-icon>
+            <t-icon name="delete-1" color="#B22222" size="48rpx" bindtap="deleteRecord" data-id="{{item._id}}"/>
           </view>
           <!-- 动态遍历所有记录 -->
           <view class="exercise-group" wx:for="{{item.exercises}}" wx:key="index" wx:if="{{item.sets && item.sets.length > 0}}">
@@ -36,9 +36,9 @@
   </view> 
   <!-- 底部导航栏 -->
   <view class="bottom-nav">
-    <view class="nav-item" bindtap="navigateToHome">
-      <t-icon name="home" size="60rpx"/>
-      <text class="nav-text">首页</text>
+    <view class="nav-item" bindtap="navigateToCalendar">
+      <t-icon name="calendar" size="60rpx"/>
+      <text class="nav-text">训练日历</text>
     </view>
     <view class="nav-item" bindtap="navigateToProfile">
       <mp-icon type="field" icon="add" color="black" size="{{35}}" bindtap="navigateToAddRecord"></mp-icon>

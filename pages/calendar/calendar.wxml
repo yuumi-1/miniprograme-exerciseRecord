@@ -1,0 +1,73 @@
+<view class="page">
+<view class="calendar-container">
+  <!-- 返回按钮 -->
+  <t-navbar title="添加记录" left-arrow />
+  <!-- 年月选择器 -->
+  <view class="calendar-header">
+    <view class="calendar-nav" bindtap="prevMonth">
+      <t-icon name="arrow-left" size="40rpx" />
+    </view>
+    <view class="calendar-title">{{currentYear}}年{{currentMonth}}月</view>
+    <view class="calendar-nav" bindtap="nextMonth">
+      <t-icon name="arrow-right" size="40rpx" />
+    </view>
+  </view>
+  
+  <!-- 星期标题 -->
+  <view class="weekdays">
+    <view class="weekday">日</view>
+    <view class="weekday">一</view>
+    <view class="weekday">二</view>
+    <view class="weekday">三</view>
+    <view class="weekday">四</view>
+    <view class="weekday">五</view>
+    <view class="weekday">六</view>
+  </view>
+  
+  <!-- 日历主体 -->
+  <view class="days-grid">
+    <!-- 空白占位（上月剩余天数） -->
+    <view class="day empty" wx:for="{{prevMonthDays}}" wx:key="index"></view>
+    
+    <!-- 当前月日期 -->
+    <view class="day {{hasRecord[item.date] ? 'has-record' : ''}}" 
+          wx:for="{{currentMonthDays}}" 
+          wx:key="date"
+          bindtap="onDayClick"
+          data-date="{{item.date}}">  
+      <view class="record-text" wx:if="{{hasRecord[item.date]}}">训练日</view>    
+      <text>{{item.day}}</text>
+      <view class="record-dot" wx:if="{{hasRecord[item.date]}}"></view>
+    </view>
+    
+    <!-- 空白占位（下月开始天数） -->
+    <view class="day empty" wx:for="{{nextMonthDays}}" wx:key="index"></view>
+  </view>
+  
+  <!-- 训练详情弹窗 -->
+  <view class="modal-mask" wx:if="{{showModal}}">
+    <view class="modal-container">
+      <view class="modal-header">
+        <view class="modal-title">{{selectedDate}} 训练记录</view>
+        <t-icon name="close" bindtap="closeModal" />
+      </view>
+      
+      <view class="modal-content">
+        <view class="workout-item" wx:for="{{selectedWorkout.exercises}}" wx:key="name">
+          <view class="workout-name" wx:if="{{item.sets && item.sets.length > 0}}">{{item.name}}</view>
+          <view class="workout-sets">
+            <view class="set-item" wx:for="{{item.sets}}" wx:key="index">
+              <text>{{item.weight}}{{selectedWorkout.unit}} x {{item.reps}}次</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      
+      <view class="modal-footer">
+        <button class="modal-button" bindtap="closeModal">关闭</button>
+      </view>
+    </view>
+  </view>
+</view>
+<bottom-nav/>
+</view>
