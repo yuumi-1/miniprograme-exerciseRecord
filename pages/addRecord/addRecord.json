@@ -2,6 +2,9 @@
   "usingComponents": {
     "mp-icon": "/miniprogram_npm/weui-miniprogram/icon/icon",
     "navigation-bar": "/components/navigation-bar/navigation-bar",
-    "nav-back": "/components/nav-back/nav-back"
+    "nav-back": "/components/nav-back/nav-back",
+    "t-input": "tdesign-miniprogram/input/input",
+    "t-dropdown-menu": "tdesign-miniprogram/dropdown-menu/dropdown-menu",
+    "t-dropdown-item": "tdesign-miniprogram/dropdown-item/dropdown-item"
   }
 }

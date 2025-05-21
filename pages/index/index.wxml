@@ -19,12 +19,14 @@
             <t-icon name="delete-1" color="#B22222" size="48rpx" bindtap="deleteRecord" data-id="{{item._id}}"/>
           </view>
           <!-- 动态遍历所有记录 -->
-          <view class="exercise-group" wx:for="{{item.exercises}}" wx:key="index" wx:if="{{item.sets && item.sets.length > 0}}">
-            <text class="exercise-name">{{item.name}}:</text>
+          <view class="exercise-container" wx:for="{{item.exercises}}" wx:key="index" wx:if="{{item.sets && item.sets.length > 0}}">
+            <view class="exercise-name">{{item.name}}:</view>
             
             <!-- 遍历该练习的所有组 -->
-            <view class="exercise-item" wx:for="{{item.sets}}" wx:key="setIndex">
-              <text class="weight">{{item.weight}} {{unit}} x {{item.reps}}</text>
+            <view class="exercise-group">
+              <view class="exercise-item" wx:for="{{item.sets}}" wx:key="setIndex">
+                <text class="weight">{{item.weight}} {{unit}} x {{item.reps}}</text>
+              </view>
             </view>
           </view>
           <view class="record-footer">

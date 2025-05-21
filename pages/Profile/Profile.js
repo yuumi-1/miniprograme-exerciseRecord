@@ -18,7 +18,6 @@ Page({
     const app = getApp();
     this.setData({
       menuHeight: app.globalData.menuHeight,
-      menuBottom: app.globalData.menuBottom,
       menuRight: app.globalData.menuRight,
       menuTop: app.globalData.menuTop
     });
@@ -71,16 +70,11 @@ Page({
           });
         });
       });
-    this.setData({
-      max1RM,
-      unit,
-      loading: false
-    })
-    .catch(err => {
-      console.error('获取记录失败:', err);
-      wx.showToast({ title: '加载失败', icon: 'none' });
-      this.setData({ loading: false });
-    });
+      this.setData({
+        max1RM,
+        unit,
+        loading: false
+      })
     })
   },
   

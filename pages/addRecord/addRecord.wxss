@@ -58,7 +58,14 @@
     margin-bottom: 20rpx;
     color: #000000;
   }
-
+  .customed-title {
+    display: flex;              /* 开启 flex 布局 */
+    align-items: center;        /* 垂直居中对齐子元素 */
+    justify-content: space-between; /* 子元素两端对齐，中间留空 */
+    flex-wrap: nowrap;          /* 不换行（如需换行可改为 wrap） */
+    padding: 16rpx;             /* 内边距，避免内容贴边 */
+  }
+  
   .sets-container {
     display: flex;
     flex-direction: column;
@@ -104,16 +111,17 @@
   /* 底部按钮 */
   .save-button-container {
     position: fixed;
-    bottom: 50rpx;
     left: 0;
     right: 0;
     padding: 0 30rpx;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
+    z-index: 999; 
+    transition: bottom 0.2s ease;
   }
 
-  .save-button {
+.save-button {
     display: flex;
     width: 100%;
     height: 90rpx;
@@ -123,7 +131,8 @@
     font-size: 32rpx;
     align-items: center;
     justify-content: center;
-  }    
+    box-shadow: 0 4rpx 16rpx rgba(0, 122, 255, 0.3); /* 添加阴影增强视觉效果 */
+  }
   .back-btn {
     position: fixed;
     display: flex;
@@ -132,4 +141,6 @@
     z-index: 999;
     padding: 0 10rpx;
   }
-  
+  .picker-exercise-item {
+    margin: 0 60rpx;
+  }

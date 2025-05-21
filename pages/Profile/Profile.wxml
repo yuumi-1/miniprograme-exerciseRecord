@@ -15,5 +15,5 @@
     </view>
     <text class="chart-title">1RM预测：基于Epley Formula</text>
   </view>
-  <bottom-nav/>
+  <view><bottom-nav/></view>
 </view>

@@ -22,24 +22,35 @@
     <!-- 动态渲染锻炼项目 -->
     <view class="workout-item" wx:for="{{exercises}}" wx:key="name" wx:for-item="exercise">
       <!-- 自定义训练名称可编辑 -->
-      <view wx:if="{{exercise.isCustom}}" class="workout-title">
+      <view wx:if="{{exercise.isCustom}}" class="customed-title">
         <input type="text" 
                 placeholder="自定义训练项目" 
                 value="{{exercise.name}}" 
                 bindinput="onCustomNameChange" 
                 data-index="{{index}}"
-                class="custom-title-input"/>
-        <t-icon name="delete-1" color="#B22222" size="38rpx" bindtap="deleteItem" data-index="{{index}}"/>
+                class="workout-title"/>
+        <t-dropdown-menu>
+          <t-dropdown-item
+          label="选择训练项"
+          optionsColumns="2"
+          options="{{exerciseOptions.options}}"
+          bindchange="onExerciseSelect"
+          data-index="{{index}}"
+        />
+        </t-dropdown-menu>
+        <t-icon name="delete-1" color="#B22222" size="42rpx" bindtap="deleteItem" data-index="{{index}}"/>
       </view>
       <!-- 普通训练名称不可编辑 -->
-      <view wx:else class="workout-title">{{exercise.name}}
-        <t-icon class="deleteIcon" name="delete-1" color="#B22222" size="38rpx" bindtap="deleteItem" data-index="{{index}}"/>
+      <view wx:else class="workout-title"><view>{{exercise.name}}</view>
+        <t-icon name="delete-1" color="#B22222" size="42rpx" bindtap="deleteItem" data-index="{{index}}"/>
       </view>
       <view class="sets-container">
         <view class="set-item" wx:for="{{exercise.sets}}" wx:key="index" wx:for-item="set">
           <input type="digit" placeholder="重量" 
                 value="{{set.weight}}" 
                 bindinput="onWeightChange" 
+                bindfocus="onInputFocus" 
+                bindblur="onInputBlur"
                 data-type="{{exercise.name}}" 
                 data-index="{{index}}"
                 cursor-spacing="100"/>
@@ -47,17 +58,18 @@
           <input type="digit" placeholder="次数" 
                 value="{{set.reps}}" 
                 bindinput="onRepsChange" 
+                bindfocus="onInputFocus" 
+                bindblur="onInputBlur"
                 data-type="{{exercise.name}}" 
                 data-index="{{index}}"
                 cursor-spacing="100"/>
-          <text>次</text>
-          
+          <text class="unit-text">次</text>
           <view class="set-actions">
             <view wx:if="{{set.showAddBtn}}" bindtap="addSet" data-type="{{exercise.name}}">
-              <t-icon name="add" color="#228B22" size="46rpx"/>
+              <t-icon name="add-circle" color="#228B22" size="42rpx"/>
             </view>
             <view wx:else bindtap="deleteSet" data-type="{{exercise.name}}" data-index="{{index}}">
-              <t-icon name="minus" color="#B22222" size="46rpx"/>
+              <t-icon name="remove" color="#B22222" size="42rpx"/>
             </view>
           </view>
         </view>
@@ -67,9 +79,9 @@
   </scroll-view>
 
   <!-- 底部保存按钮 -->
-  <view class="save-button-container">
-    <button class="save-button" bindtap="saveAndBack">
-      <text>保存</text>
-    </button>
+  <view class="save-button-container" style="bottom: {{keyboardHeight > 0 ? keyboardHeight + 280 : 100}}rpx">
+  <view class="save-button" bindtap="saveAndBack">
+    保存记录
   </view>
+</view>
 </view>

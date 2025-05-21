@@ -21,7 +21,7 @@ Page({
     // 使用云开发数据库查询
     const db = wx.cloud.database();
     db.collection('workout_records')
-      .orderBy('createTime', 'desc') // 按创建时间倒序排列
+      .orderBy('date', 'desc') // 按创建时间倒序排列
       .skip((this.data.pageNum - 1) * this.data.pageSize)
       .limit(this.data.pageSize)
       .get()

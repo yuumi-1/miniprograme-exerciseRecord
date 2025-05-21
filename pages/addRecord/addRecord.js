@@ -7,7 +7,72 @@ Page({
       { name: 'Squat', sets: [{ weight: '', reps: '', showAddBtn: true }] },
       { name: 'Deadlift', sets: [{ weight: '', reps: '', showAddBtn: true }] },
       { name: 'Benchpress', sets: [{ weight: '', reps: '', showAddBtn: true }] }
-    ]
+    ],
+    keyboardHeight: 0,
+    inputFocused: false,
+    exerciseOptions: {
+      value: "",
+      options: [
+        // 上肢推类
+        { label: "标准俯卧撑", value: "pushup" },
+        { label: "哑铃卧推", value: "dumbbellBench" },
+        { label: "上斜哑铃卧推", value: "inclineDumbbellPress" },
+        { label: "下斜杠铃卧推", value: "declineBarbellBench" },
+        { label: "双杠臂屈伸", value: "dip" },
+        { label: "过头推举", value: "overheadPress" },
+        
+        // 上肢拉类
+        { label: "引体向上", value: "pullup" },
+        { label: "高位下拉", value: "latPulldown" },
+        { label: "哑铃划船", value: "dumbbellRow" },
+        { label: "杠铃划船", value: "barbellRow" },
+        { label: "单臂哑铃划船", value: "singleArmDumbbellRow" },
+        { label: "俯身哑铃飞鸟", value: "bentOverDumbbellFly" },
+        
+        // 下肢训练
+        { label: "深蹲", value: "squat" },
+        { label: "罗马尼亚硬拉", value: "romanianDeadlift" },
+        { label: "腿弯举", value: "legCurl" },
+        { label: "腿伸展", value: "legExtension" },
+        { label: "箭步蹲", value: "lunge" },
+        { label: "保加利亚分腿蹲", value: "bulgarianSplitSquat" },
+        
+        // 核心训练
+        { label: "平板支撑", value: "plank" },
+        { label: "仰卧抬腿", value: "legRaise" },
+        { label: "俄罗斯转体", value: "russianTwist" },
+        { label: "侧平板支撑", value: "sidePlank" },
+        { label: "卷腹", value: "crunch" },
+        { label: "仰卧起坐", value: "situp" },
+        
+        // 肩部训练
+        { label: "哑铃侧平举", value: "lateralRaise" },
+        { label: "哑铃前平举", value: "frontRaise" },
+        { label: "哑铃后束飞鸟", value: "rearDeltFly" },
+        { label: "阿诺德推举", value: "arnoldPress" },
+        
+        // 手臂训练
+        { label: "杠铃弯举", value: "barbellCurl" },
+        { label: "哑铃集中弯举", value: "concentrationCurl" },
+        { label: "绳索下压", value: "tricepPushdown" },
+        { label: "颈后臂屈伸", value: "tricepExtension" },
+        
+        // 功能性训练
+        { label: "波比跳", value: "burpee" },
+        { label: "壶铃摇摆", value: "kettlebellSwing" },
+        { label: "药球砸墙", value: "medicineBallSlam" },
+        { label: "战绳", value: "battleRope" },
+        
+      ]
+    }
+  },
+  
+  onInputFocus() {
+    this.setData({ inputFocused: true });
+  },
+
+  onInputBlur() {
+    this.setData({ inputFocused: false });
   },
 
   onLoad() {
@@ -16,8 +81,48 @@ Page({
     this.setData({
       date: `${date.getFullYear()}-${this.formatNumber(date.getMonth() + 1)}-${this.formatNumber(date.getDate())}`
     });
+    //键盘监听
+    this.keyboardListener = wx.onKeyboardHeightChange(res => {
+      this.setData({
+        keyboardHeight: res.height
+      });
+    });
+  },
+  // 页面卸载时取消监听
+  onUnload() {
+    this.keyboardListener && this.keyboardListener();
+  },
+  // 显示训练项选择器
+  showExercisePicker(e) {
+    const index = e.currentTarget.dataset.index;
+    this.setData({
+      showExercisePicker: true,
+      currentExerciseIndex: index
+    });
   },
 
+  // 隐藏训练项选择器
+  hideExercisePicker() {
+    this.setData({ showExercisePicker: false });
+  },
+
+  // 选择训练项
+  selectExercise(e) {
+    const optionIndex = e.currentTarget.dataset.index;
+    const { presetExercises, currentExerciseIndex, exercises } = this.data;
+    
+    if (currentExerciseIndex >= 0 && optionIndex >= 0) {
+      // 更新训练项名称
+      exercises[currentExerciseIndex].name = presetExercises[optionIndex];
+      
+      this.setData({
+        exercises,
+        showExercisePicker: false
+      });
+      
+      wx.showToast({ title: '已更新训练项', icon: 'success' });
+    }
+  },
   // 格式化数字为两位数
   formatNumber(n) {
     return n < 10 ? '0' + n : n;
@@ -111,13 +216,27 @@ Page({
       }
     });
   },
-  // 自定义训练名称变更
+  // 处理训练项选择
+  onExerciseSelect(e) {
+    const { index } = e.currentTarget.dataset;
+    const value = e.detail.value;
+    const selectedOption = this.data.exerciseOptions.options.find(
+      option => option.value === value
+    );
+    const exercises = [...this.data.exercises];
+    exercises[index].name = selectedOption.label;
+    
+    this.setData({ exercises });
+  },
+
+  // 自定义训练项名称输入
   onCustomNameChange(e) {
     const { index } = e.currentTarget.dataset;
-    const exercises = [...this.data.exercises];
+    const { value } = e.detail;
     
-    // 更新自定义训练的名称
-    exercises[index].name = e.detail.value;
+    const exercises = [...this.data.exercises];
+    exercises[index].name = value;
+    
     this.setData({ exercises });
   },
 
@@ -132,8 +251,8 @@ Page({
     
     // 生成唯一的默认名称
     const defaultName = lastCustomIndex === -1 
-      ? '自定义训练' 
-      : `自定义训练${exercises.filter(item => item.isCustom).length + 1}`;
+      ? '输入自定义训练' 
+      : `输入自定义训练${exercises.filter(item => item.isCustom).length + 1}`;
     
     // 添加新的自定义训练项
     exercises.push({
@@ -184,7 +303,11 @@ Page({
           return wx.cloud.database().collection('workout_records')
             .doc(existingRecord._id)
             .update({
-              date: mergedData
+              data: {
+                unit: mergedData.unit,
+                exercises: mergedData.exercises,
+                updateTime: new Date()
+              }
             });
         } else {
           // 不存在相同日期的记录，直接添加
