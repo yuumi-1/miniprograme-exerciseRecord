@@ -9,7 +9,6 @@ Page({
       { name: 'Benchpress', sets: [{ weight: '', reps: '', showAddBtn: true }] }
     ],
     keyboardHeight: 0,
-    inputFocused: false,
     exerciseOptions: {
       value: "",
       options: [
@@ -67,14 +66,6 @@ Page({
     }
   },
   
-  onInputFocus() {
-    this.setData({ inputFocused: true });
-  },
-
-  onInputBlur() {
-    this.setData({ inputFocused: false });
-  },
-
   onLoad() {
     // 初始化日期为今天
     const date = new Date();
@@ -233,11 +224,13 @@ Page({
   onCustomNameChange(e) {
     const { index } = e.currentTarget.dataset;
     const { value } = e.detail;
+    console.log(e.currentTarget);
     
     const exercises = [...this.data.exercises];
     exercises[index].name = value;
     
     this.setData({ exercises });
+    
   },
 
   addCustomSet() {

@@ -9,7 +9,7 @@
     </view>
 
     <!-- 最大1RM数据卡片 -->
-    <view class="one-rm-cards" wx:for="{{max1RM}}" wx:for-index="key">
+    <view class="one-rm-cards" wx:for="{{max1RM}}" wx:key="id" wx:for-index="key">
       <text class="card-title">{{key}}</text>
       <text class="card-value">{{item}} {{unit}}</text>
     </view>

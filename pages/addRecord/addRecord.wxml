@@ -20,7 +20,7 @@
       </view>
     </view>
     <!-- 动态渲染锻炼项目 -->
-    <view class="workout-item" wx:for="{{exercises}}" wx:key="name" wx:for-item="exercise">
+    <view class="workout-item" wx:for="{{exercises}}" wx:for-item="exercise"  wx:key="id">
       <!-- 自定义训练名称可编辑 -->
       <view wx:if="{{exercise.isCustom}}" class="customed-title">
         <input type="text" 
@@ -45,12 +45,10 @@
         <t-icon name="delete-1" color="#B22222" size="42rpx" bindtap="deleteItem" data-index="{{index}}"/>
       </view>
       <view class="sets-container">
-        <view class="set-item" wx:for="{{exercise.sets}}" wx:key="index" wx:for-item="set">
+        <view class="set-item" wx:for="{{exercise.sets}}" wx:key="id" wx:for-item="set">
           <input type="digit" placeholder="重量" 
                 value="{{set.weight}}" 
                 bindinput="onWeightChange" 
-                bindfocus="onInputFocus" 
-                bindblur="onInputBlur"
                 data-type="{{exercise.name}}" 
                 data-index="{{index}}"
                 cursor-spacing="100"/>
@@ -58,8 +56,6 @@
           <input type="digit" placeholder="次数" 
                 value="{{set.reps}}" 
                 bindinput="onRepsChange" 
-                bindfocus="onInputFocus" 
-                bindblur="onInputBlur"
                 data-type="{{exercise.name}}" 
                 data-index="{{index}}"
                 cursor-spacing="100"/>
@@ -76,6 +72,14 @@
       </view>
     </view>
     <t-button size="medium" block t-class="external-class" bindtap="addCustomSet">添加自定训练组</t-button>
+    <view wx:if="{{exercise.isCustom}}" class="customed-title">
+        <input type="text" 
+                placeholder="自定义训练项目" 
+                value="{{exercise.name}}" 
+                bindinput="onCustomNameChange" 
+                data-index="{{index}}"
+                class="workout-title"/>
+    </view>
   </scroll-view>
 
   <!-- 底部保存按钮 -->
