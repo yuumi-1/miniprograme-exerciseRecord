@@ -1,0 +1,78 @@
+<view class="container">
+  <!-- 首页内容区域 - 使用scroll-view实现滚动 -->
+  <view class="content-wrapper">
+    <view class="home-content">
+      <!-- 顶部标题 -->
+      <t-navbar title="我的训练记录"/>
+
+      <!-- 无记录状态 -->
+      <view class="empty-state" wx:if="{{records.length === 0}}">
+        <mp-icon icon="more" size="{{30}}"></mp-icon>
+        <text>暂无训练记录</text>
+      </view>
+    
+      <!-- 记录列表 -->
+      <view class="records-list" wx:else>
+        <view class="record-item"
+              bindtap="onExerciseClick"
+              data-index="{{index}}" 
+              wx:for="{{records}}" 
+              wx:key="_id">
+          <view class="record-header">
+            <text class="date">{{item.date}}</text>
+            <t-icon name="delete-1" color="#B22222" size="48rpx" catchtap="deleteRecord" data-id="{{item._id}}"/>
+          </view>
+          <!-- 动态遍历所有记录 -->
+          <view class="exercise-container"
+                wx:for="{{item.exercises}}" 
+                wx:key="index" 
+                wx:if="{{item.sets && item.sets.length > 0}}">
+            <view class="exercise-name">{{item.name}} x {{item.sets.length}} 组</view>
+          </view>
+          <view class="record-footer">
+            <text class="time">{{formatTime(records.createTime)}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="load-more" bindtap="onLoad" wx:if="{{hasMore}}">点击加载更多</view>
+    </view>
+  </view> 
+  <!-- 底部导航栏 -->
+  <bottom-nav/>
+  <view class="save-button">
+    <t-button theme="primary" size="large" icon="add" shape="round" bindtap="navigateToAddRecord"
+    variant="base">
+      添加
+    </t-button>
+  </view>
+  <!-- 弹窗展示训练详情 -->
+  <t-popup visible="{{showModal}}" bind:visible-change="onExerciseClick" placement="center" >
+    <view class="auto-size-popup">
+      <view class="edit-button-container">
+        <t-button
+        class="edit-button"
+        size="small"
+        variant="outline"
+        theme="primary"
+        bind:tap="handleEdit"
+        icon="edit"
+        content="编辑"
+        />
+      </view>
+    <!-- 遍历该练习的所有组-->
+      <view wx:for="{{selectedWorkout.exercises}}" wx:key="index" class="hobby-item" >
+        <view class="exercise-title" wx:if="{{item.sets && item.sets.length > 0}}">
+          {{item.name}}
+        </view>
+        <view wx:for="{{item.sets}}" wx:key="setIndex" >
+          <text class="set-info">{{item.weight}} {{unit}} x {{item.reps}}</text>
+        </view>
+      </view>
+      <t-button class="button-close" theme="light" size="medium" icon="close" variant="default" bindtap="closeModal">
+        关闭
+      </t-button>
+    </view>
+  </t-popup>
+  
+  <custom-tab-bar initialValue="home" />
+</view>

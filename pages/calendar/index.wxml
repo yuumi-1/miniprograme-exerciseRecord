@@ -1,0 +1,87 @@
+<view class="page">
+<view class="calendar-container">
+  <!-- 返回按钮 -->
+  <t-navbar title="训练日历"/>
+  <!-- 年月选择器 -->
+  <view class="calendar-header">
+    <view class="calendar-nav" bindtap="prevMonth">
+      <t-icon name="arrow-left" size="40rpx" />
+    </view>
+    <view class="calendar-title">{{currentYear}}年{{currentMonth}}月</view>
+    <view class="calendar-nav" bindtap="nextMonth">
+      <t-icon name="arrow-right" size="40rpx" />
+    </view>
+  </view>
+  
+  <!-- 星期标题 -->
+  <view class="weekdays">
+    <view class="weekday">日</view>
+    <view class="weekday">一</view>
+    <view class="weekday">二</view>
+    <view class="weekday">三</view>
+    <view class="weekday">四</view>
+    <view class="weekday">五</view>
+    <view class="weekday">六</view>
+  </view>
+  
+  <!-- 日历主体 -->
+  <view class="days-grid">
+    <!-- 空白占位（上月剩余天数） -->
+    <view class="day empty" wx:for="{{prevMonthDays}}" wx:key="index"></view>
+    
+    <!-- 当前月日期 -->
+    <view class="day {{hasRecord[item.date] ? 'has-record' : ''}}" 
+      wx:for="{{currentMonthDays}}" 
+      wx:key="date"
+      bindtap="onDayClick"
+      data-date="{{item.date}}">  
+      <text>{{item.day}}</text>
+      <view class="record-text" wx:if="{{hasRecord[item.date]}}">训练日</view>    
+      <!-- <view class="record-dot" wx:if="{{hasRecord[item.date]}}"></view> -->
+    </view>
+    
+    <!-- 空白占位（下月开始天数） -->
+    <view class="day empty" wx:for="{{nextMonthDays}}" wx:key="index"></view>
+  </view>
+  
+  <!-- 训练详情弹窗 -->
+  <!-- 弹窗展示训练详情 -->
+  <t-popup visible="{{showModal}}" bind:visible-change="onExerciseClick" placement="center" >
+    <view class="auto-size-popup">
+      <view class="edit-button-container">
+        <t-button
+        class="edit-button"
+        size="small"
+        variant="outline"
+        theme="primary"
+        bind:tap="handleEdit"
+        icon="edit"
+        content="编辑"
+        />
+      </view>
+    <!-- 遍历该练习的所有组-->
+      <view wx:for="{{selectedWorkout.exercises}}" wx:key="index" class="hobby-item" >
+        <view class="exercise-title" wx:if="{{item.sets && item.sets.length > 0}}">
+          {{item.name}}
+        </view>
+        <view wx:for="{{item.sets}}" wx:key="setIndex" >
+          <text class="set-info">{{item.weight}} {{unit}} x {{item.reps}}</text>
+        </view>
+      </view>
+      <t-button class="button-close" theme="light" size="medium" icon="close" variant="default" bindtap="closeModal">
+        关闭
+      </t-button>
+    </view>
+  </t-popup>
+</view>
+<t-tab-bar t-class="t-tab-bar" value="{{value}}" bindchange="onChange" shape="round" theme="tag" split="{{false}}">
+  <t-tab-bar-item
+    wx:for="{{list}}"
+    wx:key="value"
+    value="{{item.value}}"
+    icon="{{item.icon}}"
+    ariaLabel="{{item.ariaLabel}}"
+  >
+  </t-tab-bar-item>
+</t-tab-bar>
+</view>

@@ -1,4 +1,0 @@
-<!--components/nav-back/nav-back.wxml-->
-<view class="back-btn" style="{{backStyle}}" bindtap="onNavigateBack">
-  <mp-icon icon="{{icon}}" size="{{size}}"></mp-icon>
-</view>

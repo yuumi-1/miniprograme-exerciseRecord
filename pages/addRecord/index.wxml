@@ -1,0 +1,113 @@
+<view class="page">
+  <!-- 返回按钮 -->
+  <t-navbar title="添加记录" left-arrow />
+
+    <!-- 锻炼项目列表 -->
+  <scroll-view class="workout-list" scroll-y="true">
+    <!-- 顶部日期和单位选择器 -->
+    <view class="header">
+      <view class="header-item">
+        <text class="label">日期</text>
+        <picker mode="date" value="{{date}}" bindchange="bindDateChange">
+          <view class="picker">{{date}}</view>
+        </picker>
+      </view>
+      <view class="header-item">
+        <text class="label">重量单位</text>
+        <picker mode="selector" value="{{unitIndex}}" bindchange="bindUnitChange" range="{{units}}">
+          <view class="picker">{{units[unitIndex]}}</view>
+        </picker>
+      </view>
+    </view>
+    <!-- 动态渲染锻炼项目 -->
+    <view class="workout-item" wx:for="{{exercises}}" wx:for-item="exercise"  wx:key="id">
+      <!-- 自定义训练名称可编辑 -->
+      <view wx:if="{{exercise.isCustom}}" class="customed-title">
+        <input type="text" 
+                placeholder="自定义训练项目" 
+                value="{{exercise.name}}" 
+                bindinput="onCustomNameChange" 
+                data-index="{{index}}"
+                class="workout-title"/>
+        <t-dropdown-menu >
+          <t-dropdown-item
+          label="选择训练项"
+          optionsColumns="2"
+          options="{{exerciseOptions.options}}"
+          bindchange="onExerciseSelect"
+          data-index="{{index}}"
+        />
+        </t-dropdown-menu>
+        <view class="action-buttons">
+          <!-- 新增：图钉按钮 -->
+          <view class="pin-button" bindtap="togglePinStatus" data-index="{{index}}">
+            <t-icon 
+              name="{{exercise.isPinned ? 'pin-filled' : 'pin'}}" 
+              size="36rpx" 
+              color="{{exercise.isPinned ? '#07c160' : '#999'}}"
+            />
+          </view>
+          <!-- 删除按钮 -->
+          <t-button theme="danger" variant="outline" size="small" bindtap="deleteItem" data-index="{{index}}">删除</t-button>
+        </view>
+      </view>
+      <!-- 普通训练名称不可编辑 -->
+      <view wx:else class="workout-title">
+        <view>{{exercise.name}}</view>
+        <view class="right-group">
+          <!-- 新增：图钉按钮 -->
+          <view class="pin-button" bindtap="togglePinStatus" data-index="{{index}}">
+            <t-icon 
+              name="{{exercise.isPinned ? 'pin-filled' : 'pin'}}" 
+              size="36rpx" 
+              color="{{exercise.isPinned ? '#07c160' : '#999'}}"
+            />
+          </view>
+          <!-- 删除按钮 -->
+          <t-button theme="danger" variant="outline" size="small" bindtap="deleteItem" data-index="{{index}}">删除</t-button>
+        </view>
+      </view>
+      <view class="sets-container">
+        <view class="set-item" wx:for="{{exercise.sets}}" wx:key="id" wx:for-item="set">
+          <input type="digit" placeholder="重量" 
+                value="{{set.weight}}" 
+                bindinput="onWeightChange" 
+                data-type="{{exercise.name}}" 
+                data-index="{{index}}"
+                cursor-spacing="100"/>
+          <text class="unit-text">{{units[unitIndex]}}</text>
+          <input type="digit" placeholder="次数" 
+                value="{{set.reps}}" 
+                bindinput="onRepsChange" 
+                data-type="{{exercise.name}}" 
+                data-index="{{index}}"
+                cursor-spacing="100"/>
+          <text class="unit-text">次</text>
+          <view class="set-actions">
+            <view wx:if="{{set.showAddBtn}}" bindtap="addSet" data-type="{{exercise.name}}">
+              <t-icon name="add" color="#228B22" size="42rpx"/>
+            </view>
+            <view wx:else bindtap="deleteSet" data-type="{{exercise.name}}" data-index="{{index}}">
+              <t-icon name="close" color="#B22222" size="42rpx"/>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <t-button size="medium" block t-class="external-class" bindtap="addCustomSet">添加自定训练组</t-button>
+    <view wx:if="{{exercise.isCustom}}" class="customed-title">
+        <input type="text" 
+                placeholder="自定义训练项目" 
+                value="{{exercise.name}}" 
+                bindinput="onCustomNameChange" 
+                data-index="{{index}}"
+                class="workout-title"/>
+    </view>
+    <!-- 键盘弹出时浮动保存按钮 -->
+    <view class="{{keyboardHeight > 0 ? 'save-button-small' : 'save-button-bottom'}}">
+      <t-button theme="primary" size="large" icon="object-storage" shape="round" bindtap="saveAndBack" variant="base" block>
+        保存
+      </t-button>
+    </view>
+  </scroll-view>
+</view>

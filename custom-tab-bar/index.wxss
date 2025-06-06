@@ -1,0 +1,3 @@
+.wrapper {
+  --td-tab-bar-height: 90rpx;
+}

@@ -1,0 +1,160 @@
+.weight-page {
+  padding: 30rpx;
+  min-height: 100vh;
+  background-color: #f7f8fa;
+}
+
+.date-section {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.05);
+}
+
+.date-label {
+  font-size: 32rpx;
+  color: #333;
+  flex: 1;
+}
+
+.date-value {
+  font-size: 32rpx;
+  margin-right: 20rpx;
+  color: #1890ff;
+}
+
+.input-section {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.05);
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40rpx;
+}
+
+.weight-input {
+  flex: 1;
+  font-size: 80rpx;
+  font-weight: bold;
+  height: 120rpx;
+}
+
+.unit-selector {
+  display: flex;
+  align-items: center;
+  padding: 10rpx 20rpx;
+  border: 1rpx solid #ddd;
+  border-radius: 8rpx;
+}
+
+.unit-text {
+  font-size: 36rpx;
+  margin-right: 10rpx;
+}
+
+.time-selector {
+  display: flex;
+  justify-content: space-between;
+}
+
+.time-option {
+  padding: 12rpx 32rpx;
+  border: 1rpx solid #eee;
+  border-radius: 32rpx;
+  font-size: 28rpx;
+}
+
+.time-option.active {
+  background-color: #e6f7ff;
+  border-color: #1890ff;
+  color: #1890ff;
+}
+
+.note-section {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+  display: block;
+}
+
+.note-input {
+  width: 100%;
+  min-height: 120rpx;
+  font-size: 30rpx;
+  padding: 20rpx;
+  background-color: #f8f8f8;
+  border-radius: 12rpx;
+  box-sizing: border-box;
+}
+
+.char-count {
+  display: block;
+  text-align: right;
+  font-size: 26rpx;
+  color: #bfbfbf;
+  margin-top: 10rpx;
+}
+
+.trend-card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.05);
+}
+
+.trend-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+  display: block;
+}
+
+.trend-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.last-weight {
+  font-size: 32rpx;
+  color: #666;
+}
+
+.weight-delta {
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+.weight-delta.down {
+  color: #52c41a; /* 绿色表示体重下降 */
+}
+
+.weight-delta.up {
+  color: #f5222d; /* 红色表示体重上升 */
+}
+
+.save-button-container {
+  position: fixed;
+  bottom: 60rpx;
+  left: 30rpx;
+  right: 30rpx;
+}

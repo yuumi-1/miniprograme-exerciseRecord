@@ -1,0 +1,16 @@
+/* setting/index.wxss */
+.setting-page {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+.my-info {
+    border-radius: 24rpx;
+    margin: 16rpx 0rpx;
+}
+
+.card-title {
+  padding: 16rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+}

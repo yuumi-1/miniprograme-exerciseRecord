@@ -1,8 +1,0 @@
-{
-  "usingComponents": {
-    "mp-icon": "/miniprogram_npm/weui-miniprogram/icon/icon",
-    "bottom-nav": "/components/bottom-nav/bottom-nav"
-
-
-  }
-}

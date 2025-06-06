@@ -11,5 +11,25 @@
     "showShadowRootInWxmlPanel": true,
     "compileHotReLoad": true,
     "cloudfunctionRoot": "cloudfunctions/"
+  },
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/weight-record/index",
+          "pathName": "pages/weight-record/index",
+          "query": "",
+          "scene": null,
+          "launchMode": "default"
+        },
+        {
+          "name": "pages/setting/index",
+          "pathName": "pages/setting/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        }
+      ]
+    }
   }
 }

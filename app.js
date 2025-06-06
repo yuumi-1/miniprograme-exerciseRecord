@@ -1,6 +1,10 @@
 // app.js
 App({
-  onLaunch: function(){
+  onLaunch(){
+    const settings = wx.getStorageSync('workoutSettings');
+    if (settings) {
+      this.globalData.userSettings = settings;
+    }
     wx.cloud.init({
       env:'cloud1-1g8heoms9adc09e6'
     })
@@ -12,18 +16,14 @@ App({
     menuRight: 0, 
     menuTop: 0, 
     menuHeight: 0,
-    eventBus: {
-      listeners: {},
-      on(event, callback) {
-        if (!this.listeners[event]) this.listeners[event] = [];
-        this.listeners[event].push(callback);
-      },
-      emit(event, data) {
-        if (this.listeners[event]) {
-          this.listeners[event].forEach(callback => callback(data));
-        }
-      }
-    }
+    needRefreshCalendar: false,
+    userSettings: {
+      // 用户选择的默认训练项
+      defaultExercises: ['深蹲', '硬拉', '卧推']
+    },
+  },
+  saveUserSettings() {
+    wx.setStorageSync('workoutSettings', this.globalData.userSettings);
   },
   calcNavBarInfo () {
     // 获取系统信息

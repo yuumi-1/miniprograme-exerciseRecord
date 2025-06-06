@@ -1,0 +1,253 @@
+/**index.wxss**/
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+}
+
+.page-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  text-align: center;
+  padding: 80rpx 0;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 600rpx;
+}
+
+.empty-state image {
+  width: 200rpx;
+  height: 200rpx;
+  margin-bottom: 20rpx;
+}
+
+.empty-state text {
+  font-size: 28rpx;
+  color: #999;
+  margin-bottom: 40rpx;
+}
+
+.add-btn {
+  display: flex;
+  width: 100%;
+  height: 90rpx;
+  background-color: #007aff;
+  color: white;
+  border-radius: 45rpx;
+  font-size: 32rpx;
+  align-items: center;
+  justify-content: center;
+}
+
+.records-list {
+  height: auto; 
+  overflow-y: auto; 
+  padding-bottom: 36rpx; 
+}
+/* 每条记录的卡片样式 */
+.record-card {
+  margin: 20rpx;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  background-color: #fff;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.1);
+}
+.record-item {
+  border: 0.5px solid #ccc;
+  background-color: white;
+  border-radius: 12rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+  padding: 2rpx;
+  margin-bottom: 16rpx;
+}
+
+.record-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding:20rpx;
+}
+
+.date {
+  font-size: 33rpx;
+  font-weight: bold;
+}
+
+.unit {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.record-content {
+  display: grid;
+  margin-bottom: 15rpx;
+}
+.exercise-group {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+}
+.exercise-item {
+  display: flex;
+  flex-direction:row;
+  align-items: center;
+  margin: 4rpx; /* 内边距替代间隙 */
+
+}
+.exercise-item .weight {
+  padding: 10rpx;
+  font-size: 26rpx;
+  text-align: center;
+  color: #708090;   /* 允许文本换行 */
+}
+.exercise-name {
+  padding: 0 16rpx;
+}
+.exercise-container {
+  background-color: #fff;
+  border-radius: 12rpx;
+  padding: 12rpx;
+  border-bottom: 1rpx solid #e5e5e5; /* 底部边框作为分割线 */
+}
+
+.record-footer {
+  text-align: right;
+}
+
+.time {
+  font-size: 22rpx;
+  color: #999;
+}    
+
+.home-content {
+  height: 100%; 
+  width: 100%;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+
+.content-wrapper{
+  flex: 1;
+  overflow: auto;
+  margin-bottom: 80rpx;
+}
+
+
+.add-button {
+  width: 50px;
+  height: 50px;
+  background-color: #007aff;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 50px;
+  color: white;
+  font-size: 32rpx;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: white;
+  padding: 10px 0;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-text {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.load-more {
+  text-align: center;
+  padding: 20rpx;
+  color: #999;
+  font-size: 28rpx;
+}
+.save-button {
+  position: fixed;
+  bottom: 208rpx;
+  right: 32rpx;
+}
+.block {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  background: var(--td-bg-color-container);
+  border-radius: 16rpx;
+}
+
+.close-btn {
+  position: absolute;
+  left: 50%;
+  margin-left: -32rpx;
+  bottom: calc(-1 * (48rpx + 64rpx));
+}
+
+.auto-size-popup {
+  position: relative;
+  min-width: 70vw;  /* 最小宽度 */
+  max-width: 95vw;    /* 最大宽度 */
+  min-height: 200rpx; /* 最小高度 */
+  max-height: 80vh;   /* 最大高度 */
+  padding: 32rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.set-info {
+  padding: 24rpx;
+  font-size: 30rpx;
+  color: #666;
+}
+
+.exercise-title {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #333;
+  padding: 12rpx;
+  border-bottom: 1rpx solid #eee;
+}
+/* 按钮容器定位 */
+.edit-button-container {
+  position: absolute;
+  top: 16rpx;
+  right: 24rpx;
+  z-index: 10;
+}
+
+/* 按钮样式优化 */
+.edit-button {
+  padding: 8rpx 24rpx !important;
+  border-radius: 1rpx !important;
+  box-shadow: 0 2rpx 14rpx rgba(24, 144, 255, 0.2);
+  transition: all 0.3s ease;
+  align-items: center;
+  display: flex;
+  flex-direction: row !important;       /* 强制横向排列 */
+  align-items: center !important;       /* 垂直居中 */
+}
+
+.button-close {
+  margin: 32rpx 0 0 0;
+}

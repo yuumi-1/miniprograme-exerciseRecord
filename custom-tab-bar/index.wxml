@@ -1,0 +1,7 @@
+<view class="wrapper">
+<t-tab-bar value="{{ value }}" shape="round" theme="tag" split="{{ false }}" bind:change="handleChange">
+  <t-tab-bar-item icon="calendar" value="calendar">训练日历</t-tab-bar-item>
+  <t-tab-bar-item icon="home" value="home">首页</t-tab-bar-item>
+  <t-tab-bar-item icon="user" value="profile">我的</t-tab-bar-item>
+</t-tab-bar>
+</view>

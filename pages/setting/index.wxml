@@ -1,0 +1,19 @@
+<view class="setting-page">
+  <t-navbar title="设置" left-icon="arrowleft" left-arrow/>
+  <view class="my-info">
+    <!-- 设置项列表 -->
+    <t-cell-group theme="card">
+      <t-cell
+        title="添加训练时的默认展示项"
+        hover
+        arrow
+        bind:tap="handlePopup"
+      />
+    </t-cell-group>
+  </view>
+  <t-popup style="height: 75%;" visible="{{visible}}" bind:visible-change="onVisibleChange" placement="bottom">
+    <scroll-view class="block" scroll-y="{{true}}">
+      <t-checkbox-group value="{{current}}" bind:change="handleGroupChange" options="{{exerciseOptions.options}}" />
+    </scroll-view>
+  </t-popup>
+</view>

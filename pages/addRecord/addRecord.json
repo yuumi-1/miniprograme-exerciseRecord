@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "mp-icon": "/miniprogram_npm/weui-miniprogram/icon/icon",
-    "t-dropdown-menu": "tdesign-miniprogram/dropdown-menu/dropdown-menu",
-    "t-dropdown-item": "tdesign-miniprogram/dropdown-item/dropdown-item"
-  }
-}

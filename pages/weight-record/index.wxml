@@ -1,0 +1,86 @@
+<view class="weight-page">
+  <!-- 头部标题 -->
+  <t-navbar title="记录" left-icon="arrowleft" left-arrow bind:click-left="onBack" />
+  
+  <!-- 当前日期 -->
+  <view class="date-section">
+    <text class="date-label">测量日期</text>
+    <picker mode="date" value="{{date}}" bindchange="bindDateChange">
+      <view class="date-value">{{date}}</view>
+    </picker>
+    <t-icon name="calendar" size="36rpx" color="#666" />
+  </view>
+  
+  <!-- 体重输入区域 -->
+  <view class="input-section">
+    <view class="input-group">
+      <input 
+        type="digit" 
+        placeholder="输入" 
+        value="{{weight}}" 
+        bindinput="onWeightInput" 
+        class="weight-input"
+        focus="{{true}}"
+      />
+      
+      <!-- 单位选择器 -->
+      <picker mode="selector" range="{{units}}" value="{{unitIndex}}" bindchange="bindUnitChange">
+        <view class="unit-selector">
+          <text class="unit-text">{{units[unitIndex]}}</text>
+          <t-icon name="arrow-down" size="28rpx" color="#666" />
+        </view>
+      </picker>
+    </view>
+    
+    <!-- 时间选择 -->
+    <view class="time-selector">
+      <text 
+        wx:for="{{timesOfDay}}" 
+        wx:key="index"
+        class="time-option {{selectedTime === index ? 'active' : ''}}"
+        bindtap="selectTime"
+        data-index="{{index}}"
+      >
+        {{item}}
+      </text>
+    </view>
+  </view>
+  
+  <!-- 备注区域 -->
+  <view class="note-section">
+    <text class="section-title">备注</text>
+    <input 
+      placeholder="记录" 
+      value="{{notes}}" 
+      bindinput="onNotesInput" 
+      class="note-input"
+      maxlength="100"
+      auto-height
+    />
+    <text class="char-count">{{notes.length}}/100</text>
+  </view>
+  
+  <!-- 历史趋势卡片 -->
+  <view class="trend-card" wx:if="{{lastWeight}}">
+    <text class="trend-title">最近趋势</text>
+    <view class="trend-content">
+      <text class="last-weight">上次: {{lastWeight.weight}}{{lastWeight.unit}}</text>
+      <text class="weight-delta {{weightDelta < 0 ? 'down' : 'up'}}">
+        {{weightDelta > 0 ? '+' : ''}}{{weightDelta}}{{lastWeight.unit}}
+      </text>
+    </view>
+  </view>
+  
+  <!-- 保存按钮 -->
+  <view class="save-button-container">
+    <t-button 
+      theme="primary" 
+      block 
+      shape="round" 
+      bindtap="saveWeightRecord"
+      loading="{{isSaving}}"
+    >
+      保存体重记录
+    </t-button>
+  </view>
+</view>

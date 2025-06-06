@@ -1,10 +1,12 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/addRecord/addRecord",
-    "pages/Profile/Profile",
-    "pages/trainCalendar/trainCalendar",
-    "pages/calendar/calendar"
+    "pages/home/index",
+    "pages/addRecord/index",
+    "pages/profile/index",
+    "pages/calendar/index",
+    "pages/Max1RM/index",
+    "pages/setting/index",
+    "pages/weight-record/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -13,9 +15,22 @@
   "componentFramework": "glass-easel",
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents",
-  "usingComponents": {
-    "t-button": "tdesign-miniprogram/button/button",
-    "t-icon": "tdesign-miniprogram/icon/icon",
-    "t-navbar": "tdesign-miniprogram/navbar/navbar"
+  "usingComponents": {},
+  "tabBar": {
+    "custom": true,
+    "list": [
+      {
+        "pagePath": "pages/calendar/index",
+        "text": "日历"
+      },
+      {
+        "pagePath": "pages/home/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/profile/index",
+        "text": "我的"
+      }
+    ]
   }
 }
