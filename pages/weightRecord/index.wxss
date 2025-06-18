@@ -1,0 +1,222 @@
+/* index.wxss */
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f5f7fa;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 20px;
+  padding: 0 24rpx;
+  font-size: 14px;
+  font-weight: 500;
+  color: #37a2da;
+}
+
+.chart-container {
+  border-radius: 12px;
+  margin: 0px 20px 10px 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.chart-canvas {
+  width: 100% !important;
+  height: 200px !important;
+}
+
+.data-list-container {
+  flex: 1;
+  margin: 0 20px 20px;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.data-item {
+  position: relative; /* 每个列表项设置相对定位，作为图标定位参考 */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 60rpx 12px 48rpx; /* 右侧留出图标空间 */
+  border-bottom: 1px solid #f0f2f5;
+}
+
+.data-item:last-child {
+  border-bottom: none;
+}
+
+.date {
+  font-size: 14px;
+  color: #666;
+}
+
+.weight {
+  font-size: 16px;
+  font-weight: 500;
+  color: #37a2da;
+}
+.block {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 70vh;
+}
+.label {
+  font-size: 32rpx;
+  margin-bottom: 12rpx;
+}
+.picker {
+  background-color: #cccccc41;
+  padding: 20rpx;
+  border-radius: 16rpx;
+  font-size: 32rpx;
+}
+.header-item {
+  flex: 1;
+  margin-right: 24rpx;
+  justify-content: space-between;
+}
+.custom-popup {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 75vh; /* 占据页面80%高度，可调整 */
+  max-height: 800rpx; /* 最大高度限制 */
+  border-top-left-radius: 16rpx;
+  border-top-right-radius: 16rpx;
+  background-color: #fff;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+.popup-content {
+  flex: 1;
+  overflow-y: auto; /* 内容过多时显示滚动 */
+  padding: 0;
+}
+.input-row {
+  display: flex;
+  flex-direction: column;
+  padding: 20rpx;
+}
+
+
+/* 日期和体重输入行布局 */
+.input-row {
+  display: flex;
+  flex-direction: column;
+  padding: 20rpx;
+}
+
+.date-cell, .weight-cell {
+  margin-bottom: 20rpx;
+  padding: 0;
+}
+
+.weight-cell .cell-right {
+  flex: 1;
+  padding: 0;
+}
+
+/* 输入框样式 */
+.input-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.weight-input {
+  flex: 1;
+  height: 88rpx;
+  font-size: 32rpx;
+  text-align: right;
+  padding-right: 20rpx;
+}
+
+/* 底部按钮样式 */
+.popup-footer {
+  display: flex;
+  padding: 30rpx 40rpx;
+  background-color: #f5f5f5;
+  border-top: 1rpx solid #eee;
+}
+
+.cancel-btn, .confirm-btn {
+  flex: 1;
+  margin: 0 20rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  border-radius: 44rpx;
+  font-size: 32rpx;
+}
+
+.cancel-btn {
+  color: #666;
+  background-color: #fff;
+  border: 1rpx solid #ddd;
+}
+
+.confirm-btn {
+  color: #fff;
+  background-color: #37a2da;
+}
+.popblock {
+  width: 100vw;
+  height: 240px;
+  background: var(--td-bg-color-container);
+  border-top-left-radius: 16rpx;
+  border-top-right-radius: 16rpx;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  height: 116rpx;
+}
+
+.poptitle {
+  flex: 1;
+  text-align: center;
+  font-weight: 600;
+  font-size: 36rpx;
+  color: var(--td-text-color-primary);
+}
+
+.btn {
+  font-size: 32rpx;
+  padding: 32rpx;
+}
+
+.btn--cancel {
+  color: var(--td-text-color-secondary);
+}
+
+.btn--confirm {
+  color: #0052d9;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 600rpx;
+}
+.empty-state text {
+  font-size: 28rpx;
+  color: #999;
+  margin-bottom: 40rpx;
+}
+.delete-icon {
+  position: absolute; /* 绝对定位，脱离文档流，不占布局空间 */
+  right: 6px; /* 距离右侧20px */
+  top: 50%; /* 垂直居中 */
+  transform: translateY(-50%); /* 向上偏移50%，实现精确居中 */
+  z-index: 10; /* 确保图标在最上层 */
+}

@@ -1,0 +1,64 @@
+<!-- index.wxml -->
+<view class="container">
+  <!-- 标题栏 -->
+  <t-navbar 
+    title="数据" 
+    left-icon="arrowleft" 
+    left-arrow 
+    class="navbar"
+  />  
+  <view class="title">
+    <view>kg</view>
+    <view><t-button theme="primary" size="extra-small" variant="text" bind:tap="handlePopup">添加数据</t-button></view>
+  </view>
+  <!-- 图表区域 -->
+  
+  <view class="chart-container">
+    <view class="empty-state" wx:if="{{weightData.length === 0}}">
+      <mp-icon icon="more" size="{{30}}"></mp-icon>
+      <text>暂无记录</text>
+    </view>
+    <canvas 
+      canvas-id="lineCanvas" 
+      style="width: 100%; height: 200px;"
+      class="chart-canvas"
+      wx:if="{{weightData.length > 0}}"
+    ></canvas>
+  </view>
+
+  <!-- 数据列表区域 -->
+  <view class="data-list-container">
+    <view class="empty-state" wx:if="{{weightData.length === 0}}">
+      <mp-icon icon="more" size="{{30}}"></mp-icon>
+      <text>暂无记录</text>
+    </view>
+    <view class="data-item" wx:for="{{weightData}}" wx:key="item._id">    
+      <view class="weight">{{item.weight}} kg</view>
+      <view class="date">{{item.date}}</view>      
+      <t-icon name="delete-1" color="#B22222" size="large" catchtap="deleteRecord" data-id="{{item._id}}" class="delete-icon"/>
+    </view>    
+  </view>
+</view>
+
+<t-popup
+  visible="{{visible}}"
+  bind:visible-change="onVisibleChange"
+  placement="bottom"
+  class="custom-popup"
+>
+  <view class="header">
+    <view class="btn btn--cancel" aria-role="button" bindtap="onClose">取消</view>
+    <view class="poptitle">标题文字</view>
+    <view class="btn btn--confirm" aria-role="button" bindtap="saveWeight">确定</view>
+  </view>
+  <view class="data-item">
+    <view>日期</view>    
+    <picker mode="date" value="{{date}}" bindchange="bindDateChange">
+      <view class="picker">{{date}}</view>
+    </picker>
+  </view>
+  <view class="data-item">
+    <view>体重(公斤)</view>
+    <input type="digit" bindinput="onWeightChange" />
+  </view>
+</t-popup>

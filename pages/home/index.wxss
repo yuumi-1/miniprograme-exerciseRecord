@@ -72,12 +72,13 @@
   justify-content: space-between;
   align-items: center;
   background-color: #f9f9f9;
-  padding:20rpx;
+  padding:8px;
 }
 
 .date {
-  font-size: 33rpx;
+  font-size: 32rpx;
   font-weight: bold;
+  
 }
 
 .unit {
@@ -108,6 +109,7 @@
 }
 .exercise-name {
   padding: 0 16rpx;
+  
 }
 .exercise-container {
   background-color: #fff;
@@ -126,7 +128,7 @@
 }    
 
 .home-content {
-  height: 100%; 
+  height: 120%; 
   width: 100%;
   padding: 20rpx;
   box-sizing: border-box;
@@ -135,7 +137,7 @@
 .content-wrapper{
   flex: 1;
   overflow: auto;
-  margin-bottom: 80rpx;
+  margin-bottom: 84px;
 }
 
 

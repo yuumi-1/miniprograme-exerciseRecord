@@ -52,5 +52,4 @@ Page({
     const { dialogKey } = this.data;
     this.setData({ [dialogKey]: false });
   },
-
 })

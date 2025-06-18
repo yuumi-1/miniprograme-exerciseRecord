@@ -30,22 +30,20 @@
       />  -->
       <t-cell
         title="身体数据"
-        left-icon="chart-line-data"
+        left-icon="accessibility-filled"
         hover
         arrow
-        url="/pages/weight-record/index"
+        url="/pages/weightRecord/index"
       />
       <!-- 1RM预测 -->
       <t-cell
         title="1RM预测"
-        left-icon="letters-m"
+        left-icon="calculator-1"
         hover
         arrow
         url="/pages/Max1RM/index"
       />
-            
-      <!-- 关于 -->
-      <t-cell
+      <!-- <t-cell
         title="关于"
         left-icon="info-circle"
         hover
@@ -59,7 +57,11 @@
         content="如有功能建议或问题反馈请发送邮件至：le111101@163.com"
         confirm-btn="{{ confirmBtn }}"
         bind:confirm="closeDialog"
-      />
+      /> -->
   </t-cell-group>
   </view>
+  <view class="feedback">
+    <button open-type="feedback" class="feedback-btn-plain">反馈与建议</button>
+  </view>
+  
 </view>

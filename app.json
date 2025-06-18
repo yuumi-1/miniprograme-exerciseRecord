@@ -6,7 +6,7 @@
     "pages/calendar/index",
     "pages/Max1RM/index",
     "pages/setting/index",
-    "pages/weight-record/index"
+    "pages/weightRecord/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",

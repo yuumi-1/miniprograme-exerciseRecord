@@ -15,13 +15,13 @@
   
   <!-- 星期标题 -->
   <view class="weekdays">
-    <view class="weekday">日</view>
     <view class="weekday">一</view>
     <view class="weekday">二</view>
     <view class="weekday">三</view>
     <view class="weekday">四</view>
     <view class="weekday">五</view>
-    <view class="weekday">六</view>
+    <view class="weekday">六</view>    
+    <view class="weekday">日</view>
   </view>
   
   <!-- 日历主体 -->
@@ -34,7 +34,7 @@
       wx:for="{{currentMonthDays}}" 
       wx:key="date"
       bindtap="onDayClick"
-      data-date="{{item.date}}">  
+      data-date="{{item.date}}">       
       <text>{{item.day}}</text>
       <view class="record-text" wx:if="{{hasRecord[item.date]}}">训练日</view>    
       <!-- <view class="record-dot" wx:if="{{hasRecord[item.date]}}"></view> -->
@@ -68,20 +68,10 @@
           <text class="set-info">{{item.weight}} {{unit}} x {{item.reps}}</text>
         </view>
       </view>
-      <t-button class="button-close" theme="light" size="medium" icon="close" variant="default" bindtap="closeModal">
+      <t-button class="button-close" theme="light" size="medium" icon="close" variant="outline" bindtap="closeModal">
         关闭
       </t-button>
     </view>
   </t-popup>
 </view>
-<t-tab-bar t-class="t-tab-bar" value="{{value}}" bindchange="onChange" shape="round" theme="tag" split="{{false}}">
-  <t-tab-bar-item
-    wx:for="{{list}}"
-    wx:key="value"
-    value="{{item.value}}"
-    icon="{{item.icon}}"
-    ariaLabel="{{item.ariaLabel}}"
-  >
-  </t-tab-bar-item>
-</t-tab-bar>
 </view>

@@ -1,9 +1,13 @@
 {
   "usingComponents": {
-    "t-dropdown-menu": "tdesign-miniprogram/dropdown-menu/dropdown-menu",
-    "t-dropdown-item": "tdesign-miniprogram/dropdown-item/dropdown-item",
     "t-navbar": "tdesign-miniprogram/navbar/navbar",
     "t-button": "tdesign-miniprogram/button/button",
-    "t-icon": "tdesign-miniprogram/icon/icon"
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-popup": "tdesign-miniprogram/popup/popup",    
+    "t-checkbox-group": "tdesign-miniprogram/checkbox-group/checkbox-group",
+    "t-checkbox": "tdesign-miniprogram/checkbox/checkbox",
+    "t-cell": "tdesign-miniprogram/cell/cell",
+    "t-tree-select": "tdesign-miniprogram/tree-select/tree-select"
+
   }
 }

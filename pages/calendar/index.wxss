@@ -1,8 +1,9 @@
+.page{
+  height: 100vh;
+  background-color: #f5f5f5;
+}
 .calendar-container {
   padding: 20rpx;
-  background-color: #fff;
-  min-height: 100vh;
-  background-color: #f5f5f5;
 }
 
 .calendar-header {
@@ -111,7 +112,6 @@
 .modal-content {
   padding: 24rpx 32rpx;
   max-height: 60vh;
-  overflow-y: auto;
 }
 
 .workout-item {
@@ -179,20 +179,6 @@
   z-index: 2; /* 确保文字在圆形背景上方 */
 }
 
-/* 圆形背景（用伪元素实现） */
-/* .day.has-record::before {
-  content: '';
-  position: absolute;
-  top: 35%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80rpx;
-  height: 80rpx;
-  border-radius: 40rpx; 
-  background-color: rgba(144, 202, 249, 0.2);
-  z-index: 0;
-} */
-
 /* 红点指示器 */
 .record-dot {
   position: absolute;
@@ -206,21 +192,30 @@
 }
 
 .has-record {
+  /* background-color: #E6E6FA; */
+  /* border-radius: 32rpx; */
+}
+.has-record::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -30px;
+  margin-left: -20px; 
+  width: 40px;
+  height: 40px;
   background-color: #E6E6FA;
-  border-radius: 32rpx;
+  border-radius: 50%;
 }
 /* 训练日标签 */
 .record-text {
-    color: #CC3366   ;
-    font-weight: bold;
+    color: #a33c5e;
     width: 90%;
-    font-size: 26rpx;
+    font-size: 12px;
     margin-top: 4rpx;
     z-index: 2;
     position: relative;
-    font-weight: 500;
     text-align: center;
-    background-color: #E6E6FA	;
 }
 
 /* 保持空单元格对齐 */

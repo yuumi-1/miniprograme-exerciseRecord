@@ -1,68 +1,67 @@
 Page({
   data: {
     date: '',
+    value: [],
     units: ['kg', 'lb'],
     unitIndex: 0,
     isEdit: false,
     editRecordId: {},
     globalSettings: null,
     exercises: [],
+    current:[],
     keyboardHeight: 0,
-    exerciseOptions: {
-      value: "",
-      options: [
-        { label: "深蹲", value: "squat" },
-        { label: "卧推", value: "benchpress" },
-        { label: "硬拉", value: "deadlift" },
-        // 上肢推类
-        { label: "哑铃卧推", value: "dumbbellBench" },
-        { label: "上斜哑铃卧推", value: "inclineDumbbellPress" },
-        { label: "下斜杠铃卧推", value: "declineBarbellBench" },
-        { label: "双杠臂屈伸", value: "dip" },
-        { label: "过头推举", value: "overheadPress" },
-        
-        // 上肢拉类
-        { label: "引体向上", value: "pullup" },
-        { label: "高位下拉", value: "latPulldown" },
-        { label: "哑铃划船", value: "dumbbellRow" },
-        { label: "杠铃划船", value: "barbellRow" },
-        { label: "单臂哑铃划船", value: "singleArmDumbbellRow" },
-        { label: "俯身哑铃飞鸟", value: "bentOverDumbbellFly" },
-        
-        // 下肢训练
-        { label: "罗马尼亚硬拉", value: "romanianDeadlift" },
-        { label: "泽奇深蹲", value: "romanianDeadlift" },
-        { label: "前蹲", value: "legCurl" },
-        { label: "器械倒蹬", value: "lunge" },
-        { label: "坐姿腿弯举", value: "bulgarianSplitSquat" },
-        
-        // 核心训练
-        { label: "平板支撑", value: "plank" },
-        { label: "仰卧抬腿", value: "legRaise" },
-        { label: "俄罗斯转体", value: "russianTwist" },
-        { label: "侧平板支撑", value: "sidePlank" },
-        { label: "卷腹", value: "crunch" },
-        { label: "仰卧起坐", value: "situp" },
-        
-        // 肩部训练
-        { label: "哑铃侧平举", value: "lateralRaise" },
-        { label: "哑铃前平举", value: "frontRaise" },
-        { label: "哑铃后束飞鸟", value: "rearDeltFly" },
-        { label: "阿诺德推举", value: "arnoldPress" },
-        
-        // 手臂训练
-        { label: "杠铃弯举", value: "barbellCurl" },
-        { label: "哑铃集中弯举", value: "concentrationCurl" },
-        { label: "绳索下压", value: "tricepPushdown" },
-        { label: "颈后臂屈伸", value: "tricepExtension" },
-        
-        // 功能性训练
-        { label: "波比跳", value: "burpee" },
-        { label: "壶铃摇摆", value: "kettlebellSwing" },
-        { label: "药球砸墙", value: "medicineBallSlam" },
-        { label: "战绳", value: "battleRope" }
-      ]
-    }
+    visible: false,
+    exerciseOptions: [
+      {
+        label: "基础训练",
+        value: "basic",
+        children: [
+          { label: "深蹲", value: "squat" },
+          { label: "卧推", value: "benchpress" },
+          { label: "硬拉", value: "deadlift" }
+        ]
+      },
+      {
+        label: "上肢推类",
+        value: "upperPush",
+        children: [
+          { label: "上斜卧推", value: "inclineDumbbellPress" },
+          { label: "下斜卧推", value: "declineBarbellBench" },
+          { label: "双杠臂屈伸", value: "dip" },
+          { label: "过头推举", value: "overheadPress" }
+        ]
+      },
+      {
+        label: "上肢拉类",
+        value: "upperPull",
+        children: [
+          { label: "引体向上", value: "pullup" },
+          { label: "高位下拉", value: "latPulldown" },
+          { label: "划船", value: "dumbbellRow" },
+          { label: "俯身哑铃飞鸟", value: "bentOverDumbbellFly" }
+        ]
+      },
+      {
+        label: "下肢训练",
+        value: "lowerBody",
+        children: [
+          { label: "罗马尼亚硬拉", value: "romanianDeadlift" },
+          { label: "前蹲", value: "legCurl" },
+          { label: "器械倒蹬", value: "lunge" },
+          { label: "腿弯举", value: "bulgarianSplitSquat" }
+        ]
+      },
+      {
+        label: "肩部训练",
+        value: "shoulder",
+        children: [
+          { label: "哑铃侧平举", value: "lateralRaise" },
+          { label: "哑铃前平举", value: "frontRaise" },
+          { label: "哑铃后束飞鸟", value: "rearDeltFly" },
+          { label: "阿诺德推举", value: "arnoldPress" }
+        ]
+      }
+    ]
   },
   onShow() {
     const app = getApp();
@@ -70,7 +69,9 @@ Page({
   },
   onLoad(options) {
     const app = getApp();
-    this.setData({ globalSettings: app.globalData.userSettings });
+    const exerciseOptionsLabelValueMap = this.generateLabelValueMap(this.data.exerciseOptions)
+    this.setData({ globalSettings: app.globalData.userSettings,
+      exerciseOptionsLabelValueMap });
     // 初始化默认训练项
     const defaultExercises = app.globalData.userSettings.defaultExercises.map(name => ({
       name: name,
@@ -109,10 +110,20 @@ Page({
       const date = new Date();
       this.setData({
         date: `${date.getFullYear()}-${this.formatNumber(date.getMonth() + 1)}-${this.formatNumber(date.getDate())}`,
-        exercises: defaultExercises // 使用全局配置的默认项
+        exercises: defaultExercises, // 使用全局配置的默认项
       });
     }
-    //键盘监听
+    this.data.exercises.forEach(item => {
+      const selectedOptionValue = this.data.exerciseOptionsLabelValueMap[item.name]
+      // this.data.current.push(selectedOptionValue.value)
+      this.setData({
+        current: [...this.data.current, selectedOptionValue]
+      });      
+    })
+    this.setData({
+      current: [0,[...this.data.current]]
+    });    
+    //键盘监听    
     this.keyboardListener = wx.onKeyboardHeightChange(res => {
       setTimeout(() => {
           this.setData({
@@ -265,7 +276,6 @@ Page({
   onCustomNameChange(e) {
     const { index } = e.currentTarget.dataset;
     const { value } = e.detail;
-    console.log(e.currentTarget);
     
     const exercises = [...this.data.exercises];
     exercises[index].name = value;
@@ -291,13 +301,12 @@ Page({
     
     // 添加新的自定义训练项
     exercises.push({
-      name: defaultName,
+      // name: defaultName,
       sets: [{ weight: '', reps: '', showAddBtn: true }],
       isCustom: true,
       isPinned: false, // 默认不固定
       isDefaultExercise: false // 标记为非默认项
     });
-    
     // 更新数据
     this.setData({ exercises });
   },
@@ -314,11 +323,11 @@ Page({
       unit: this.data.units[this.data.unitIndex],
       exercises: this.data.exercises.map(exercise => ({
         name: exercise.name,
-        sets: exercise.sets.filter(set => set.weight && set.reps)
+        sets: exercise.sets.filter(set => set.reps)
       })),
       createTime: new Date()
     };
-  
+    console.log("保存的数据：",workoutData)
     wx.showLoading({ title: '保存中...' });
   
     if (this.data.isEdit) {
@@ -482,7 +491,7 @@ Page({
     const prevPage = pages[pages.length - 2];
     const app = getApp();
     app.globalData.needRefreshCalendar = true;
-    prevPage.refreshData && prevPage.refreshData();
+    prevPage.refreshData();
    
     // 返回上一页
     setTimeout(() => wx.navigateBack(), 500);
@@ -522,20 +531,118 @@ Page({
     
     this.setData({ exercises });
     wx.showToast({
-      title: exercise.isPinned ? '添加为默认项' : '取消默认项',
+      title: exercise.isPinned ? '已添加固定展示项' : '已取消固定展示项',
       icon: 'none'
     });
   },
   validateData() {
-    const hasData = this.data.exercises.some(exercise => 
-      exercise.sets.some(set => set.weight && set.reps)
+    const exercises = [...this.data.exercises];
+    const hasSetsData = this.data.exercises.some(exercise => 
+      exercise.sets.some(set => set.reps)
     );
-    
-    if (!hasData) {
+    //weight为空则置0
+    exercises.forEach(exercise=>{
+      exercise.sets.forEach(set=>{
+        if (set.weight === "" && set.reps) {
+          set.weight = 0;
+        }
+      })
+    })
+    this.setData({ 
+      exercises,
+    });    
+    if (!hasSetsData) {
       wx.showToast({ title: '请至少填写一组锻炼数据', icon: 'none' });
       return false;
-    };
-    
+    };    
     return true;
-  }
+  },
+  handlePopup(e) {
+    this.setData({ visible: true });
+  },
+  onVisibleChange(e) {
+    this.setData({
+      visible: e.detail.visible,
+    });
+  },
+  handleGroupChange(event) {
+    this.setData({
+      current: event.detail.value,      
+    });
+  },
+  
+  onClose(){
+    this.setData({ visible: false });
+  },
+  saveExercisesOption(){
+    const exercises = [...this.data.exercises];
+    this.setData({ 
+      exercises,
+    });
+    //添加新项目
+    const currentExercises = this.data.current[1].map(value => {
+      const selectedOptionLabel = this.data.exerciseOptionsLabelValueMap[value]
+      const matchedItem  = this.data.exercises.find(item => 
+        item.name === selectedOptionLabel
+      )      
+      console.log(matchedItem)
+      return matchedItem ? { ...matchedItem } : {
+        name: selectedOptionLabel,
+        sets: [{ weight: '', reps: '', showAddBtn: true }],
+        isPinned: false, // 默认不固定
+        isDefaultExercise: false // 标记为非默认项
+      }
+    })
+    this.setData({ 
+      exercises:currentExercises,
+    });
+    this.onClose();
+  },
+  saveCustomExercises(){
+    const exercises = [...this.data.exercises];
+    //如果取消勾选，则删除取消勾选的元素
+    // exercises.forEach(item => {
+    //   const selectedOption = this.data.exerciseOptions.options.find(
+    //     option => option.label === item.name
+    //   );
+    //   if(!this.data.current.includes(selectedOption.value)){
+    //     for (let i = exercises.length - 1; i >= 0; i--) {
+    //       if (selectedOption.label === exercises[i].name) {
+    //         exercises.splice(i, 1);
+    //       }
+    //     }
+    //   }
+    // })
+    //添加新项目
+    this.data.current.forEach(item => {
+      const selectedOption = this.data.exerciseOptions.options.find(
+        option => option.value === item
+      );
+      const filteredList  = this.data.exercises.find(item => 
+        item.name === selectedOption.label
+      )      
+      if(!filteredList){
+        exercises.push({
+          name: selectedOption.label,
+          sets: [{ weight: '', reps: '', showAddBtn: true }],
+          isPinned: false, // 默认不固定
+          isDefaultExercise: false // 标记为非默认项
+        })
+      }
+    })
+    this.setData({ 
+      exercises,
+    });
+    this.onClose()
+  },
+  generateLabelValueMap(tree) {
+    const map = {};
+    tree.forEach(node=>{
+      node.children.forEach(item=>{
+        map[item.label] = item.value;
+        map[item.value] = item.label;
+      })
+    })
+    return map;
+  },
 });

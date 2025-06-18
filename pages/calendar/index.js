@@ -44,7 +44,7 @@ Page({
     const { currentYear, currentMonth } = this.data;
     
     // 获取当月第一天是星期几（0-6）
-    const firstDay = new Date(currentYear, currentMonth - 1, 1).getDay();
+    const firstDay = new Date(currentYear, currentMonth - 1, 0).getDay();
     
     // 获取当月总天数
     const daysInMonth = new Date(currentYear, currentMonth, 0).getDate();

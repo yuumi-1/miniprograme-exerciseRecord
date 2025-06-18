@@ -68,7 +68,7 @@
           <text class="set-info">{{item.weight}} {{unit}} x {{item.reps}}</text>
         </view>
       </view>
-      <t-button class="button-close" theme="light" size="medium" icon="close" variant="default" bindtap="closeModal">
+      <t-button class="button-close" theme="light" size="medium" icon="close" variant="outline" bindtap="closeModal">
         关闭
       </t-button>
     </view>

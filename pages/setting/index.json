@@ -7,6 +7,8 @@
     "t-icon": "tdesign-miniprogram/icon/icon",
     "t-button": "tdesign-miniprogram/button/button",
     "t-checkbox-group": "tdesign-miniprogram/checkbox-group/checkbox-group",
-    "t-checkbox": "tdesign-miniprogram/checkbox/checkbox"
+    "t-checkbox": "tdesign-miniprogram/checkbox/checkbox",
+    "t-tree-select": "tdesign-miniprogram/tree-select/tree-select"
+
   }
 }

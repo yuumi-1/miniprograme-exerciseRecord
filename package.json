@@ -16,6 +16,8 @@
   },
   "homepage": "https://github.com/yuumi-1/miniprograme-exerciseRecord#readme",
   "dependencies": {
+    "@antv/f2": "^4.0.51",
+    "@qiun/wx-ucharts": "^2.5.0-20230101",
     "@vant/weapp": "^1.11.7",
     "echarts": "^5.6.0",
     "echarts-for-weixin": "^1.0.2",
